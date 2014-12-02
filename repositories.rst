@@ -51,11 +51,11 @@ for reading. These repositories cannot be modified.
 
 A very simple example is the :class:`Puli\\Filesystem\\PhpCacheRepository`. This
 repository reads the resource paths from a set of PHP files, which are created
-with the :method:`Puli\\Filesystem\\PhpCacheRepository::dumpRepository` method:
+with the :method:`Puli\\Repository\\Filesystem\\PhpCacheRepository::dumpRepository` method:
 
 .. code-block:: php
 
-    use Puli\Filesystem\PhpCacheRepository;
+    use Puli\Repository\Filesystem\PhpCacheRepository;
     use Puli\Repository\ResourceRepository;
 
     $repo = new ResourceRepository(),
@@ -63,7 +63,7 @@ with the :method:`Puli\\Filesystem\\PhpCacheRepository::dumpRepository` method:
 
     PhpCacheRepository::dumpRepository($repo, '/path/to/cache');
 
-Then create a :class:`Puli\\Filesystem\\PhpCacheRepository` and pass the path to
+Then create a :class:`Puli\\Repository\\Filesystem\\PhpCacheRepository` and pass the path to
 the directory where you dumped the PHP files:
 
 .. code-block:: php
@@ -75,24 +75,24 @@ the directory where you dumped the PHP files:
 
 Puli supports the following repository implementations:
 
-===============================================  ======================================  ========
-Repository                                       Description                             Writable
-===============================================  ======================================  ========
-:class:`Puli\\Repository\\ResourceRepository`    Manages resources in memory.            Yes
-:class:`Puli\\Filesystem\\PhpCacheRepository`    Reads resources from dumped PHP files.  No
-:class:`Puli\\Filesystem\\FilesystemRepository`  Reads resources from the filesystem.    No
-===============================================  ======================================  ========
+===========================================================  ======================================  ========
+Repository                                                   Description                             Writable
+===========================================================  ======================================  ========
+:class:`Puli\\Repository\\ResourceRepository`                Manages resources in memory.            Yes
+:class:`Puli\\Repository\\Filesystem\\PhpCacheRepository`    Reads resources from dumped PHP files.  No
+:class:`Puli\\Repository\\Filesystem\\FilesystemRepository`  Reads resources from the filesystem.    No
+===========================================================  ======================================  ========
 
 Repository Backends
 -------------------
 
 The :class:`Puli\\Repository\\ResourceRepository` expects a *backend repository*
 to be passed to its constructor. If you pass none, a
-:class:`Puli\\Filesystem\\FilesystemRepository` is used by default:
+:class:`Puli\\Repository\\Filesystem\\FilesystemRepository` is used by default:
 
 .. code-block:: php
 
-    use Puli\\Filesystem\\FilesystemRepository;
+    use Puli\Repository\Filesystem\FilesystemRepository;
     use Puli\Repository\ResourceRepository;
 
     $backend = new FilesystemRepository();
@@ -109,7 +109,7 @@ the backend is used to lookup the added resources:
     // same as
     $repo->add('/css', $backend->get('/path/to/assets/css');
 
-This is very useful, because :class:`Puli\\Filesystem\\FilesystemRepository`
+This is very useful, because :class:`Puli\\Repository\\Filesystem\\FilesystemRepository`
 expects a *root path* in its own constructor. When a root path is set, all
 other paths are read relative to that root path:
 
@@ -141,16 +141,16 @@ manually:
     $repo->add('/css', new LocalDirectoryResource('/path/to/assets/css'));
 
 The passed resources must implement
-:class:`Puli\\Resource\\AttachableResourceInterface`. Here is a list of all
+:class:`Puli\\Repository\\Resource\\AttachableResourceInterface`. Here is a list of all
 resources implemented in Puli core:
 
-===========================================================  ======================================
-Repository                                                   Description
-===========================================================  ======================================
-:class:`Puli\\Resource\\DirectoryResource`                   A virtual directory in the repository.
-:class:`Puli\\Filesystem\\Resource\\LocalDirectoryResource`  A directory on the file system.
-:class:`Puli\\Filesystem\\Resource\\LocalFileResource`       A file on the file system.
-===========================================================  ======================================
+=======================================================================  ======================================
+Repository                                                               Description
+=======================================================================  ======================================
+:class:`Puli\\Repository\\Resource\\DirectoryResource`                   A virtual directory in the repository.
+:class:`Puli\\Repository\\Filesystem\\Resource\\LocalDirectoryResource`  A directory on the file system.
+:class:`Puli\\Repository\\Filesystem\\Resource\\LocalFileResource`       A file on the file system.
+=======================================================================  ======================================
 
 Further Reading
 ---------------

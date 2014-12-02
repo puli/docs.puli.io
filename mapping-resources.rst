@@ -159,7 +159,7 @@ in the "acme/blog" package. If a resource was not found in the overriding
 package, the resource from the original package will be returned instead.
 
 You can get all paths for an overridden resource using the
-:method:`Puli\\Filesystem\\Resource\\LocalResourceInterface::getAllLocalPaths`
+:method:`Puli\\Repository\\Filesystem\\Resource\\LocalResourceInterface::getAllLocalPaths`
 method. The paths are returned in the order in which they were overridden,
 starting with the original path:
 

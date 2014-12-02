@@ -18,12 +18,12 @@ You can access individual resources in the repository with the method
     echo $repo->get('/css/style.css')->getContents();
 
 The :method:`Puli\\Repository\\ResourceRepositoryInterface::get` method accepts
-the path of a resource and returns a :class:`Puli\\Resource\\ResourceInterface`.
+the path of a resource and returns a :class:`Puli\\Repository\\Resource\\ResourceInterface`.
 
 If you want to retrieve multiple resources at once, use
 :method:`Puli\\Repository\\ResourceRepositoryInterface::find`. This method
 accepts a glob pattern and returns a
-:class:`Puli\\Resource\\Collection\\ResourceCollectionInterface`:
+:class:`Puli\\Repository\\Resource\\Collection\\ResourceCollectionInterface`:
 
 .. code-block:: php
 
@@ -51,7 +51,7 @@ Resources
 ---------
 
 The :method:`Puli\\Repository\\ResourceRepositoryInterface::get` method returns
-:class:`Puli\\Resource\\ResourceInterface` instances. This interface lets you
+:class:`Puli\\Repository\\Resource\\ResourceInterface` instances. This interface lets you
 access the name and the repository path of the resource:
 
 .. code-block:: php
@@ -65,9 +65,9 @@ access the name and the repository path of the resource:
     // => /css/style.css
 
 Resources don't necessarily have to be located on the file system. But those
-that do implement :class:`Puli\\Filesystem\\Resource\\LocalResourceInterface`,
+that do implement :class:`Puli\\Repository\\Filesystem\\Resource\\LocalResourceInterface`,
 which lets you access the file system path with
-:method:`Puli\\Filesystem\\Resource\\LocalResourceInterface::getLocalPath`:
+:method:`Puli\\Repository\\Filesystem\\Resource\\LocalResourceInterface::getLocalPath`:
 
 .. code-block:: php
 
@@ -80,7 +80,7 @@ Files
 -----
 
 File resources implement the additional interface
-:class:`Puli\\Resource\\FileResourceInterface`. With this interface, you can
+:class:`Puli\\Repository\\Resource\\FileResourceInterface`. With this interface, you can
 access the contents and file size (in bytes):
 
 .. code-block:: php
@@ -94,7 +94,7 @@ access the contents and file size (in bytes):
     // => 1049
 
 If you want to cache the file,
-:method:`Puli\\Resource\\FileResourceInterface::getLastModifiedAt` returns the
+:method:`Puli\\Repository\\Resource\\FileResourceInterface::getLastModifiedAt` returns the
 UNIX timestamp (seconds since January 1st, 1970) of when the file was last
 modified:
 
@@ -108,21 +108,21 @@ Directories
 -----------
 
 Directory resources implement the additional interface
-:class:`Puli\\Resource\\DirectoryResourceInterface`. This way you can easily
+:class:`Puli\\Repository\\Resource\\DirectoryResourceInterface`. This way you can easily
 distinguish directories from files:
 
 .. code-block:: php
 
-    use Puli\Resource\DirectoryResourceInterface;
+    use Puli\Repository\Resource\DirectoryResourceInterface;
 
     if ($resource instanceof DirectoryResourceInterface) {
         // ...
     }
 
 You can access the contents of a directory with the methods
-:method:`Puli\\Resource\\DirectoryResourceInterface::get`,
-:method:`Puli\\Resource\\DirectoryResourceInterface::contains` and
-:method:`Puli\\Resource\\DirectoryResourceInterface::listEntries`:
+:method:`Puli\\Repository\\Resource\\DirectoryResourceInterface::get`,
+:method:`Puli\\Repository\\Resource\\DirectoryResourceInterface::contains` and
+:method:`Puli\\Repository\\Resource\\DirectoryResourceInterface::listEntries`:
 
 .. code-block:: php
 
@@ -140,9 +140,9 @@ Resource Collections
 --------------------
 
 When you fetch multiple resources from the repository, they are returned
-in a :class:`Puli\\Resource\\Collection\\ResourceCollectionInterface` instance.
-Resource collections offer convenience methods for accessing the names and the
-paths of all contained resources at once:
+in a :class:`Puli\\Repository\\Resource\\Collection\\ResourceCollectionInterface`
+instance. Resource collections offer convenience methods for accessing the names
+and the paths of all contained resources at once:
 
 .. code-block:: php
 
@@ -164,7 +164,7 @@ paths of all contained resources at once:
 
 Resource collections are traversable, countable and support
 :phpclass:`ArrayAccess`. When you still need the collection as array, call
-:method:`Puli\\Resource\\Collection\\ResourceCollectionInterface::toArray`:
+:method:`Puli\\Repository\\Resource\\Collection\\ResourceCollectionInterface::toArray`:
 
 .. code-block:: php
 

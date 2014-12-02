@@ -11,15 +11,15 @@ URI Repositories
 ----------------
 
 Puli allows to use multiple repositories side by side through the
-:class:`Puli\\Uri\\UriRepository` class, which assigns
+:class:`Puli\\Repository\\Uri\\UriRepository` class, which assigns
 :class:`Puli\\Repository\\ResourceRepositoryInterface` instances to URI scheme.
-You can then use the :class:`Puli\\Uri\\UriRepository` like a regular repository,
-except that you pass URIs instead of paths:
+You can then use the :class:`Puli\\Repository\\Uri\\UriRepository` like a
+regular repository, except that you pass URIs instead of paths:
 
 .. code-block:: php
 
     use Puli\Repository\ResourceRepository;
-    use Puli\Uri\UriRepository;
+    use Puli\Repository\Uri\UriRepository;
 
     $repo = new ResourceRepository();
     $repo->add('/Acme/Blog', '/path/to/acme/blog/src');
@@ -40,7 +40,7 @@ protocol "psr4://" to the other locator.
 
 Usually it is a good idea to construct the repositories only when they are
 actually needed. You can pass callbacks to
-:method:`Puli\\Uri\\UriRepository::register` that construct the repository.
+:method:`Puli\\Repository\\Uri\\UriRepository::register` that construct the repository.
 The callback will be invoked when the URI scheme is accessed for the first
 time:
 
@@ -51,9 +51,9 @@ time:
         return require_once __DIR__.'/vendor/resource-repository.php';
     });
 
-You can use :method:`Puli\\Uri\\UriRepository::setDefaultScheme` to mark one
+You can use :method:`Puli\\Repository\\Uri\\UriRepository::setDefaultScheme` to mark one
 of the registered schemes as default scheme. The
-:class:`Puli\\Uri\\UriRepository` prepends the default scheme whenever a path
+:class:`Puli\\Repository\\Uri\\UriRepository` prepends the default scheme whenever a path
 without a scheme is passed:
 
 .. code-block:: php
@@ -74,14 +74,14 @@ Stream Wrapper
 
 Puli supports a `stream wrapper`_ that lets you access the contents of the
 repository transparently through PHP's file functions. To register the wrapper,
-call the :method:`Puli\\StreamWrapper\\ResourceStreamWrapper::register` method
-:class:`Puli\\StreamWrapper\\ResourceStreamWrapper`and pass a configured
-:class:`Puli\\Uri\\UriRepository` instance:
+call the :method:`Puli\\Repository\\StreamWrapper\\ResourceStreamWrapper::register` method
+:class:`Puli\\Repository\\StreamWrapper\\ResourceStreamWrapper`and pass a configured
+:class:`Puli\\Repository\\Uri\\UriRepository` instance:
 
 .. code-block:: php
 
-    use Puli\Uri\UriRepository;
-    use Puli\StreamWrapper\ResourceStreamWrapper;
+    use Puli\Repository\Uri\UriRepository;
+    use Puli\Repository\StreamWrapper\ResourceStreamWrapper;
 
     $uriRepo = new UriRepository();
     $uriRepo->register('composer', function () {
