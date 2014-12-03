@@ -15,13 +15,13 @@ Installation
 ------------
 
 First you need to install the `Puli bridge`_ with Composer_. Add the
-"puli/symfony-puli-bridge" package to composer.json:
+"puli/symfony-bridge" package to composer.json:
 
 .. code-block:: json
 
     {
         "require": {
-            "puli/symfony-puli-bridge": "~1.0@dev"
+            "puli/symfony-bridge": "~1.0@dev"
         }
     }
 

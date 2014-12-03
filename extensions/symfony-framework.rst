@@ -38,7 +38,7 @@ following command in a terminal:
 
 .. code-block:: bash
 
-    $ composer require "puli/symfony-puli-bundle:~1.0@dev"
+    $ composer require "puli/symfony-bundle:~1.0@dev"
 
 .. note::
 

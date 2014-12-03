@@ -11,14 +11,14 @@ extension, you can refer to template files through Puli paths:
 Installation
 ------------
 
-You can install the extension with Composer_. Add the "puli/twig-puli-extension"
+You can install the extension with Composer_. Add the "puli/twig-extension"
 package to composer.json:
 
 .. code-block:: json
 
     {
         "require": {
-            "puli/twig-puli-extension": "~1.0@dev"
+            "puli/twig-extension": "~1.0@dev"
         }
     }
 

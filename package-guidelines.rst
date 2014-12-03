@@ -10,18 +10,18 @@ If you don't know what Puli is or why you should use it, read
 Composer Configuration
 ----------------------
 
-Add the Puli library to your composer.json file:
+Add the Puli Repository component to your composer.json file:
 
 .. code-block:: json
 
     {
         "require": {
-            "puli/puli": "~1.0@dev"
+            "puli/repository": "~1.0@dev"
         }
     }
 
-This is necessary to access the Puli API in your PHP code. If you don't need the
-Puli API, you can skip this dependency.
+This is necessary to access the Repository API in your PHP code. If you don't
+need the Repository API, you can skip this dependency.
 
 Next, add Puli's `Composer plugin`_ as suggestion:
 
@@ -29,7 +29,7 @@ Next, add Puli's `Composer plugin`_ as suggestion:
 
     {
         "suggest": {
-            "puli/puli-composer-plugin": "This package contains Puli resources. Require the plugin to use them."
+            "puli/composer-plugin": "This package contains Puli resources. Require the plugin to use them."
         }
     }
 
