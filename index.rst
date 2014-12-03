@@ -4,16 +4,16 @@ Welcome to Puli's documentation!
 .. toctree::
    :hidden:
 
-    at-a-glance
-    getting-started
-    mapping-resources
-    working-with-resources
-    tags
-    uris
-    repositories
-    components
-    package-guidelines
-    extensions
+  at-a-glance
+  getting-started
+  mapping-resources
+  working-with-resources
+  tags
+  uris
+  repositories
+  components
+  package-guidelines
+  extensions
 
 Puli_ manages the files, directories and other resources of your project in a
 filesystem-like repository. Whenever you need to access these resources, you can
