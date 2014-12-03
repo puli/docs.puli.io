@@ -35,18 +35,6 @@ First, add Puli to your composer.json file:
         "minimum-stability": "dev"
     }
 
-During development, you will also need the `Puli CLI`_ and the
-`Composer plugin`_:
-
-.. code-block:: json
-
-    {
-        "require-dev": {
-            "puli/puli-cli": "~1.0@dev",
-            "puli/puli-composer-plugin": "~1.0@dev"
-        }
-    }
-
 Run ``composer update`` to install the packages. Type ``vendor/bin/puli`` to
 check whether the Puli CLI was installed successfully:
 

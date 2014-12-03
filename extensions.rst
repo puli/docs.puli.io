@@ -1,4 +1,4 @@
-Appendix B: Puli Extensions
+Appendix C: Puli Extensions
 ===========================
 
 .. toctree::

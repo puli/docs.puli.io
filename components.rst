@@ -1,5 +1,5 @@
-The Puli Components
-===================
+Appendix B: The Puli Components
+===============================
 
 Puli consists of four core components:
 
