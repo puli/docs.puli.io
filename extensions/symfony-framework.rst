@@ -165,9 +165,9 @@ Read :doc:`twig` to learn more about the Puli extension for Twig.
 
 .. _Symfony framework: http://symfony.com
 .. _Symfony Puli Edition: https://github.com/puli/symfony-puli-edition
-.. _Puli bundle: https://github.com/puli/symfony-puli-bundle
-.. _Puli CLI: https://github.com/puli/puli-cli
-.. _Puli Composer Plugin: https://github.com/puli/puli-composer-plugin
+.. _Puli bundle: https://github.com/puli/symfony-bundle
+.. _Puli CLI: https://github.com/puli/cli
+.. _Puli Composer Plugin: https://github.com/puli/composer-plugin
 .. _Installing and Configuring Symfony: http://symfony.com/doc/current/book/installation.html
 .. _Composer: https://getcomposer.org
 .. _Install Composer: https://getcomposer.org/doc/00-intro.md

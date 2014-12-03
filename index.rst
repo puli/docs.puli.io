@@ -77,6 +77,11 @@ Contributions to Puli are very welcome!
 * Report any bugs or issues you find on the `issue tracker`_.
 * You can grab the source code at Puli's `Git repository`_.
 
+If you find issues in the documentation, please let us know:
+
+* The documentation has a dedicated `docs issue tracker`_.
+* The source of the documentation is hosted at the `docs Git repository`_.
+
 Support
 -------
 
@@ -91,8 +96,10 @@ license`_.
 
 .. _Puli: https://github.com/puli/puli
 .. _issue tracker: https://github.com/puli/puli/issues
+.. _docs issue tracker: https://github.com/puli/docs/issues
 .. _Git repository: https://github.com/puli/puli
+.. _docs Git repository: https://github.com/puli/docs
 .. _@webmozart: https://twitter.com/webmozart
-.. _MIT license: https://github.com/puli/puli/blob/master/LICENSE
+.. _MIT license: LICENSE
 .. _Bernhard Schussek: http://webmozarts.com
-.. _The Community Contributors: https://github.com/puli/puli/graphs/contributors
+.. _The Community Contributors: https://github.com/puli/docs/graphs/contributors

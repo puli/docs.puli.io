@@ -73,4 +73,4 @@ relative paths:
 
 .. _Composer: https://getcomposer.org
 .. _Twig templating engine: http://twig.sensiolabs.org
-.. _extension: https://github.com/puli/twig-puli-extension
+.. _extension: https://github.com/puli/twig-extension

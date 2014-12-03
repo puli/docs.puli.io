@@ -195,6 +195,6 @@ Further Reading
   repository configuration.
 
 .. _Puli: https://github.com/puli/puli
-.. _Puli CLI: https://github.com/puli/puli-cli
-.. _Composer Plugin: https://github.com/puli/puli-composer-plugin
+.. _Puli CLI: https://github.com/puli/cli
+.. _Composer Plugin: https://github.com/puli/composer-plugin
 .. _Composer: https://getcomposer.org

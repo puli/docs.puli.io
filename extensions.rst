@@ -5,6 +5,7 @@ Appendix B: Puli Extensions
    :hidden:
 
    extensions/twig
+   extensions/symfony-framework
    extensions/symfony-config
 
 Puli_ features various extensions that integrate the library with other tools

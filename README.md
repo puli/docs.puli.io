@@ -33,8 +33,8 @@ The documentation is licensed under the [MIT license].
 [rendered documentation]: https://puli.readthedocs.org/en/latest/index.html
 [Read the Docs]: https://readthedocs.org
 [Bernhard Schussek]: http://webmozarts.com
-[The Community Contributors]: https://github.com/puli/puli-docs/graphs/contributors
-[issue tracker]: https://github.com/puli/puli-docs/issues
-[Git repository]: https://github.com/puli/puli-docs
+[The Community Contributors]: https://github.com/puli/docs/graphs/contributors
+[issue tracker]: https://github.com/puli/docs/issues
+[Git repository]: https://github.com/puli/docs
 [@webmozart]: https://twitter.com/webmozart
 [MIT license]: LICENSE

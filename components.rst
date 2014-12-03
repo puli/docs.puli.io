@@ -8,11 +8,11 @@ Puli consists of four core components:
 
 A summary of each component is given below.
 
-The PHP API
------------
+The Repository API
+------------------
 
-The `Puli`_ package contains a PHP API for managing *resource repositories* that
-map *Puli paths* to physical paths on the file system:
+The `Puli Repository`_ package contains a PHP API for managing *resource
+repositories* that map *Puli paths* to physical paths on the file system:
 
 .. code-block:: php
 
@@ -81,8 +81,8 @@ Further Reading
 Read :doc:`getting-started` to learn how to install Puli and use it in your
 project.
 
-.. _Puli: https://github.com/puli/puli
 .. _Composer: https://getcomposer.org
-.. _Puli Repository Manager: https://github.com/puli/puli-repository-manager
-.. _Puli CLI: https://github.com/puli/puli-cli
-.. _Composer Plugin: https://github.com/puli/puli-composer-plugin
+.. _Puli Repository: https://github.com/puli/repository
+.. _Puli Repository Manager: https://github.com/puli/repository-manager
+.. _Puli CLI: https://github.com/puli/cli
+.. _Composer Plugin: https://github.com/puli/composer-plugin

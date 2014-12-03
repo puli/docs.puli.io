@@ -150,7 +150,7 @@ reason, :class:`Puli\\Extension\\Symfony\\Config\\PuliFileLocator` does not
 support relative file paths.
 
 .. _Puli: https://github.com/puli/puli
-.. _Puli bridge: https://github.com/puli/symfony-puli-bridge
+.. _Puli bridge: https://github.com/puli/symfony-bridge
 .. _Composer: https://getcomposer.org
 .. _Symfony: http://symfony.com
 .. _Symfony Config component: http://symfony.com/doc/current/components/config/introduction.html

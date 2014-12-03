@@ -207,8 +207,8 @@ Further Reading
 .. _Puli: https://github.com/puli/puli
 .. _Composer: https://getcomposer.org
 .. _PSR-4: http://www.php-fig.org/psr/psr-4/
-.. _Puli's Command Line Interface: https://github.com/puli/puli-cli
-.. _Composer plugin: https://github.com/puli/puli-composer-plugin
-.. _Twig extension: https://github.com/puli/twig-puli-extension
-.. _Symfony bridge: https://github.com/puli/symfony-puli-bridge
+.. _Puli's Command Line Interface: https://github.com/puli/cli
+.. _Composer plugin: https://github.com/puli/composer-plugin
+.. _Twig extension: https://github.com/puli/twig-extension
+.. _Symfony bridge: https://github.com/puli/symfony-bridge
 .. _stream wrapper: http://php.net/manual/en/intro.stream.php

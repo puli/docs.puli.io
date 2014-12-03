@@ -103,4 +103,4 @@ retrieve resources from the repository:
     in the example. If you use a relative file path, that's not possible.
 
 .. _Puli: https://github.com/puli/puli
-.. _Composer plugin: https://github.com/puli/puli-composer-plugin
+.. _Composer plugin: https://github.com/puli/composer-plugin

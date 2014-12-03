@@ -233,4 +233,3 @@ Further Reading
 * :doc:`uris` teaches you how to use multiple resource repositories side by side.
 
 .. _Puli: https://github.com/puli/puli
-.. _Puli plugin for Composer: https://github.com/puli/composer-puli-plugin
