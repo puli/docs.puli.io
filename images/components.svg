@@ -14,7 +14,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   inkscape:export-filename="/home/bernhard/Entwicklung/Web/puli/puli/docs/images/components.png"
+   inkscape:export-filename="/home/bernhard/Entwicklung/Web/puli/docs/images/components.png"
    inkscape:export-xdpi="57.599998"
    inkscape:export-ydpi="57.599998"
    sodipodi:docname="components.svg">
@@ -28,7 +28,7 @@
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
      inkscape:zoom="0.70710678"
-     inkscape:cx="272.87657"
+     inkscape:cx="275.705"
      inkscape:cy="134.37883"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -156,7 +156,7 @@
          id="tspan3788-6"
          x="348.26492"
          y="1090.7256"
-         style="font-size:28px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;font-family:Cambria;-inkscape-font-specification:Cambria Bold">Puli PHP API</tspan></text>
+         style="font-size:28px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;font-family:Cambria;-inkscape-font-specification:Cambria Bold">Puli Repository API</tspan></text>
     <path
        style="fill:#e9e9e9;fill-opacity:1;stroke:#808080;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        d="m 339.74733,950.27827 0,-65 -342.999992,0 0,65 z"
