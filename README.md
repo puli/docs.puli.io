@@ -30,7 +30,7 @@ License
 The documentation is licensed under the [MIT license].
 
 [Puli]: https://github.com/puli/puli
-[rendered documentation]: https://docs.puli.io/en/latest/index.html
+[rendered documentation]: http://docs.puli.io/en/latest/index.html
 [Read the Docs]: https://readthedocs.org
 [Bernhard Schussek]: http://webmozarts.com
 [The Community Contributors]: https://github.com/puli/docs/graphs/contributors
