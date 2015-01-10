@@ -1,10 +1,11 @@
 Puli at a Glance
 ================
 
-Puli_ is a PHP library that manages files, directories and other resources in
-a repository - much like a virtual filesystem. *Resources* can be anything,
-but usually we use the term for machine-processed files that are *not* PHP, such
-as CSS, JavaScript, XLIFF, YAML, XML or HTML files.
+Puli_ (pronounced "poo-lee") is a PHP library that manages files, directories
+and other resources in a repository - much like a virtual filesystem.
+*Resources* can be anything, but usually we use the term for machine-processed
+files that are *not* PHP, such as CSS, JavaScript, XLIFF, YAML, XML or HTML
+files.
 
 Why Puli?
 ---------
