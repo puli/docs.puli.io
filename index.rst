@@ -13,9 +13,9 @@ Welcome to Puli's documentation!
    components
    extensions
 
-Puli_ manages the files, directories and other resources of your project in a
-filesystem-like repository. With the Puli CLI, you map *Puli paths* to paths in
-your project:
+Puli_ (pronounced "poo-lee") manages the files, directories and other resources
+of your project in a filesystem-like repository. With the Puli CLI, you map
+*Puli paths* to paths in your project:
 
 .. code-block:: text
 
