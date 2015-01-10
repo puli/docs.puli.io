@@ -31,7 +31,7 @@
      inkscape:cx="371.49509"
      inkscape:cy="341.35746"
      inkscape:document-units="px"
-     inkscape:current-layer="g3833"
+     inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:snap-page="false"
      showguides="false"
@@ -142,7 +142,7 @@
            y="924.28131"
            x="348.49554"
            id="tspan3788"
-           sodipodi:role="line">Puli Repository Manager</tspan></text>
+           sodipodi:role="line">Repository Manager</tspan></text>
     </g>
     <g
        id="g3833"
@@ -164,7 +164,7 @@
            y="1008.7012"
            x="349.67914"
            id="tspan3788-6"
-           sodipodi:role="line">Puli Discovery</tspan></text>
+           sodipodi:role="line">Discovery API</tspan></text>
     </g>
     <g
        id="g3843"
@@ -188,7 +188,7 @@
            y="844.49017"
            x="170.18303"
            id="tspan3788-63"
-           sodipodi:role="line">Puli CLI</tspan></text>
+           sodipodi:role="line">CLI</tspan></text>
     </g>
     <g
        id="g3848"
@@ -213,7 +213,7 @@
            y="844.49017"
            x="530.01892"
            id="tspan3788-63-5"
-           sodipodi:role="line">Puli Composer Plugin</tspan></text>
+           sodipodi:role="line">Composer Plugin</tspan></text>
     </g>
     <g
        id="g3828"
@@ -235,7 +235,7 @@
            y="1090.4854"
            x="351.94574"
            id="tspan3788-6-6"
-           sodipodi:role="line">Puli Repository</tspan></text>
+           sodipodi:role="line">Repository API</tspan></text>
     </g>
     <g
        style="display:inline"
@@ -258,7 +258,7 @@
            y="1008.7012"
            x="349.67914"
            id="tspan3788-6-3"
-           sodipodi:role="line">Puli Factory</tspan></text>
+           sodipodi:role="line">Factory API</tspan></text>
     </g>
   </g>
 </svg>
