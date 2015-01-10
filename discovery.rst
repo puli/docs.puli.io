@@ -76,8 +76,10 @@ Doctrine then fetches all resources bound to the type from Puli's
         }
     }
 
-Read :doc:`getting-started` if you forgot how to obtain the
-:class:`Puli\\Discovery\\Api\\ResourceDiscovery` instance.
+.. tip::
+
+    Read :doc:`getting-started` if you forgot how to obtain the
+    :class:`Puli\\Discovery\\Api\\ResourceDiscovery` instance.
 
 Binding Parameters
 ------------------
