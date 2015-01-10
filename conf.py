@@ -104,7 +104,7 @@ lexers['php'] = PhpLexer(startinline=True)
 # use PHP as the primary domain
 primary_domain = 'php'
 
-api_url = 'http://soon/%s'
+api_url = 'http://api.puli.io/%s'
 
 
 # -- Options for HTML output ----------------------------------------------
