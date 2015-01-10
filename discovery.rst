@@ -143,7 +143,7 @@ Type Descriptions
 -----------------
 
 To help the users of your type, you should add human-readable descriptions
-that describes what the type and each parameter does:
+that describe what the type and its parameters do:
 
 .. code-block:: text
 
@@ -174,8 +174,8 @@ Enabled and Disabled Bindings
 
 When you install packages that bind resources to a binding type, these bindings
 are not automatically enabled. Consider that you, the "acme/blog" developer,
-install the package "awesome-sauce/comment" which contains Doctrine mappings for
-a ``Comment`` entity. These bindings are displayed by the command ``puli bind``:
+install the package "awesome/comment" which contains Doctrine mappings for a
+``Comment`` entity. These bindings are displayed by the command ``puli bind``:
 
 .. code-block:: text
 
@@ -189,8 +189,8 @@ a ``Comment`` entity. These bindings are displayed by the command ``puli bind``:
     Bindings that are neither enabled nor disabled:
      (use "puli bind --enable <uuid>" to enable)
 
-        awesome-sauce/comment
-        1fb5b8 /awesome-sauce/comment/config/doctrine/*.xml doctrine/xml-mapping
+        awesome/comment
+        8fb9c8 /awesome/comment/config/doctrine/*.xml doctrine/xml-mapping
 
 Until you enable the binding, Doctrine will never know it is there. You have
 full control over what bindings you want to enable for any installed package.
@@ -200,15 +200,15 @@ Let's enable the binding now:
 .. code-block:: text
 
     # acme/blog developer
-    $ puli bind --enable 1fb5b8
+    $ puli bind --enable 8fb9c8
     $ puli bind
     Enabled bindings:
 
         acme/blog
         1fb5b8 /acme/blog/config/doctrine/*.xml doctrine/xml-mapping
 
-        awesome-sauce/comment
-        1fb5b8 /awesome-sauce/comment/config/doctrine/*.xml doctrine/xml-mapping
+        awesome/comment
+        8fb9c8 /awesome/comment/config/doctrine/*.xml doctrine/xml-mapping
 
 That's all you need to know about resource discovery with Puli. As you see,
 this mechanism is very simple, yet very powerful.
