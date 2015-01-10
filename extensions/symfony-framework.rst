@@ -14,7 +14,7 @@ Starting a Project from the Symfony Puli Edition
 A new project can be started based on the Symfony Puli Edition with `Composer`_.
 `Install Composer`_ and enter the following command in a terminal:
 
-.. code-block:: bash
+.. code-block:: text
 
     $ composer create-project puli/symfony-puli-edition /path/to/project "~2.5@dev"
 
@@ -36,7 +36,7 @@ If you cannot or don't want to start off the Symfony Puli Edition, you need to
 install the Puli bundle with `Composer`_. `Install Composer`_ and enter the
 following command in a terminal:
 
-.. code-block:: bash
+.. code-block:: text
 
     $ composer require "puli/symfony-bundle:~1.0@dev"
 
@@ -57,7 +57,7 @@ This will download the bundle to your project.
 When this command completes, run ``composer install`` to initialize the
 Composer plugin for Puli:
 
-.. code-block:: bash
+.. code-block:: text
 
     $ composer install
 

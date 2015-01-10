@@ -2,7 +2,7 @@ Puli at a Glance
 ================
 
 Puli_ is a PHP library that manages files, directories and other resources in
-a repository - much like a virtual file system. *Resources* can be anything,
+a repository - much like a virtual filesystem. *Resources* can be anything,
 but usually we use the term for machine-processed files that are *not* PHP, such
 as CSS, JavaScript, XLIFF, YAML, XML or HTML files.
 
@@ -24,89 +24,58 @@ Puli offers a platform- and framework-agnostic solution to this problem.
 Repositories
 ------------
 
-At its core, Puli provides a simple repository, much like a file system. You can
-"mount" files or directories to paths in the repository:
+At its core, Puli provides a simple repository, much like a filesystem. You can
+map paths in the repository to files or directories in your project with
+`Puli's Command Line Interface`_ (CLI):
+
+.. code-block:: text
+
+    $ puli map /app res
+
+Here, the *Puli path* ``/app`` is mapped to the directory ``res`` in our project.
+This allows to to access any file in the ``res`` directory by a Puli path:
 
 .. code-block:: php
 
-    use Puli\Repository\ResourceRepository;
+    // res/views/index.html
+    echo $repo->get('/app/views/index.html')->getBody();
 
-    $repo = new ResourceRepository();
-    $repo->add('/app', '/path/to/project/res');
+.. note::
 
-Here, the *Puli path* ``/app`` is mapped to the directory
-``/path/to/project/res``. This allows to to access any file in the ``res``
-directory by a Puli path:
-
-.. code-block:: php
-
-    echo $repo->get('/app/views/index.html')->getContents();
-
-The Puli CLI
-------------
-
-Usually, you will use `Puli's Command Line Interface`_ (CLI) to generate
-repositories instead of creating them by hand. Puli reads a puli.json file from
-the root directory of your project:
-
-.. code-block:: json
-
-    {
-        "resources": {
-            "/app": "res"
-        }
-    }
-
-The puli.json file allows to map Puli paths to files and directories in your
-project. Here, the Puli path ``/app`` is mapped to the directory ``res`` in
-the project's root.
-
-With the command ``puli dump``, a resource repository is generated in a PHP
-file:
-
-.. code-block:: bash
-
-    $ puli dump
-
-This file can be loaded and used in your PHP code:
-
-.. code-block:: php
-
-    $repo = require __DIR__.'/.puli/resource-repository.php';
-
-    echo $repo->get('/app/views/index.html')->getContents();
+    The variable ``$repo`` contains a
+    :class:`Puli\\Repository\\Api\\ResourceRepository` instance. You will learn
+    in :doc:`getting-started` how to load this object.
 
 Composer Integration
 --------------------
 
-Puli offers integration with Composer through its `Composer plugin`_. With this
-plugin, all puli.json files of all installed Composer packages are automatically
-loaded. For example, assume that the "acme/blog" package is installed and
-contains the following puli.json file:
+When you type ``puli map``, the mappings are saved in a puli.json file in the
+root of your project. This file needs to be committed to your Version Control
+System (for example Git) and distributed with the project.
 
-.. code-block:: json
+If your project depends on other libraries through Composer, you can access the
+resources mapped by these libraries thanks to Puli's `Composer plugin`_.
+For example, assume that the author of the "acme/blog" package distributes a
+puli.json file with the following mapping:
 
-    {
-        "resources": {
-            "/acme/blog": "res"
-        }
-    }
+.. code-block:: text
 
-The contents of the package's ``res`` directory can then be accessed through
-the Puli path ``/acme/blog``:
+    $ puli map /acme/blog res
+
+When you install the "acme/blog" package, you can access any resources of the
+package's ``res`` directory through the Puli path ``/acme/blog``:
 
 .. code-block:: php
 
-    $repo = require __DIR__.'/.puli/resource-repository.php';
-
-    echo $repo->get('/acme/blog/views/index.html')->getContents();
+    // vendor/acme/blog/res/views/index.html
+    echo $repo->get('/acme/blog/views/index.html')->getBody();
 
 Tool Integration
 ----------------
 
-Puli also provides integration layers for other PHP libraries. The
-`Twig extension`_, for example, can be used to refer to other Twig templates via
-Puli paths:
+Puli provides integration layers for several PHP libraries. The
+`Twig extension`_, for example, can be used to load Twig templates via Puli
+paths:
 
 .. code-block:: jinja
 
@@ -126,82 +95,98 @@ Resource Overriding
 Consider that you want to change the contents of
 ``/acme/blog/views/footer.html.twig`` in the "acme/blog" package without
 touching that package. With Puli, you can copy the file to your project and
-override it in your project's puli.json:
+override it in your project:
 
-.. code-block:: json
+.. code-block:: text
 
-    {
-        "resources": {
-            "/acme/blog/views/footer.html": "res/views/footer.html"
-        },
-        "override": "acme/blog"
-    }
+    $ puli map /acme/blog/views/footer.html res/views/footer.html
 
-The file ``res/views/footer.html`` will now be used wherever the file from the
-"acme/blog" package is required.
+
+The file ``res/views/footer.html`` stored in your project will now be returned
+whenever the resource ``/acme/blog/views/footer.html`` is used.
 
 Stream Wrappers
 ---------------
 
 Did you know PHP's `stream wrapper`_ feature? With Puli's stream wrapper, you
-can use Puli repositories like ordinary files:
+can use Puli resources like ordinary files:
 
 .. code-block:: php
 
     use Puli\Repository\StreamWrapper\ResourceStreamWrapper;
-    use Puli\Repository\Uri\UriRepository;
 
-    $repo = require __DIR__.'/.puli/resource-repository.php';
+    ResourceStreamWrapper::register('puli', $repo);
 
-    $uriRepo = new UriRepository();
-    $uriRepo->register('puli', $repo);
-
-    ResourceStreamWrapper::register($uriRepo);
-
-In this example, the repository generated by Composer is registered for the
-"composer://" scheme. The :class:`Puli\\Repository\\StreamWrapper\\ResourceStreamWrapper`
-class registers this scheme with PHP. Now you can access Puli resources like
-normal files, as long as you prefix them with "puli://":
+In this example, the resource repository is registered for the "puli://" scheme
+through Puli's :class:`Puli\\Repository\\StreamWrapper\\ResourceStreamWrapper`.
+Now you can access Puli resources like normal files, as long as you prefix them
+with "puli://":
 
 .. code-block:: php
 
+    // vendor/acme/blog/res/trans/en.yml
     echo file_get_contents('puli:///acme/blog/trans/en.yml');
 
-Flexibility
------------
+Resource Discovery
+------------------
 
-We kept saying "resource" instead of "file" or "directory" because resources
-are really independent of the file system. For example, you can implement
-custom repositories that load resources from a content management system.
-With the :class:`Puli\\Repository\\Uri\\UriRepository` from the previous example, you can
-use both the repository generated by Composer and your own implementation side
-by side:
+Very often, libraries support specific types of files. For example, the
+`Doctrine ORM`_ is able to load entity mappings from XML files:
+
+.. code-block:: xml
+
+    <!-- res/config/doctrine/MyProject.User.dcm.xml -->
+    <doctrine-mapping ...>
+        <entity name="MyProject\User">
+            <field name="name" type="string" />
+        </entity>
+    </doctrine-mapping>
+
+Registering this file -- and all other such files in your project *and* its
+installed packages -- with Doctrine's classes requires significant effort.
+
+Puli supports a very simple resource discovery mechanism to solve this problem.
+Libraries define *binding types* for the resources they want to process:
+
+.. code-block:: text
+
+    $ puli type define doctrine/xml-mapping
+
+Your project (and its installed packages) can now *bind* resources to these
+types:
+
+.. code-block:: text
+
+    $ puli bind /app/config/doctrine/*.xml doctrine/xml-mapping
+
+The library finally uses Puli's :class:`Puli\\Discovery\\Api\\ResourceDiscovery`
+to find all resources bound to the type "doctrine/xml-mapping":
 
 .. code-block:: php
 
-    use My\CmsRepository;
-    use Puli\Repository\Uri\UriRepository;
+    foreach ($discovery->find('doctrine/xml-mapping') as $binding) {
+        foreach ($binding->getResources() as $resource) {
+            // process $resource...
+        }
+    }
 
-    $repo = require 'vendor/resource-repository.php';
+Bindings of installed packages are not enabled by default:
 
-    $uriRepo = new UriRepository();
-    $uriRepo->register('puli', $repo);
-    $uriRepo->register('cms', new CmsRepository());
-    $uriRepo->setDefaultScheme('puli');
+.. code-block:: text
 
-If you use this repository with the Twig extension, you can simultaneously load
-resources from packages and your database now:
+    $ puli bind
+    Bindings that are neither enabled nor disabled:
+     (use "puli bind --enable <uuid>" to enable)
 
-.. code-block:: jinja
+        acme/blog
+        fc20d8 /acme/blog/config/doctrine/*.xml doctrine/xml-mapping
 
-    {% include 'cms:///ads/sidebar.html.twig' %}
-
-    {% include '/acme/blog/views/footer.html.twig' %}
+This way you can selectively control which bindings you want to enable in your
+project.
 
 Further Reading
 ---------------
 
-* :doc:`components` introduces you to Puli's core components.
 * Read :doc:`getting-started` to learn how to install Puli in your project.
 
 .. _Puli: https://github.com/puli/puli
@@ -212,3 +197,4 @@ Further Reading
 .. _Twig extension: https://github.com/puli/twig-extension
 .. _Symfony bridge: https://github.com/puli/symfony-bridge
 .. _stream wrapper: http://php.net/manual/en/intro.stream.php
+.. _Doctrine ORM: http://www.doctrine-project.org/projects/orm.html

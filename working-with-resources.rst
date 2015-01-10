@@ -11,19 +11,19 @@ Accessing Resources
 -------------------
 
 You can access individual resources in the repository with the method
-:method:`Puli\\Repository\\ResourceRepositoryInterface::get`:
+:method:`Puli\\Repository\\Api\\ResourceRepository::get`:
 
 .. code-block:: php
 
-    echo $repo->get('/css/style.css')->getContents();
+    $resource = $repo->get('/css/style.css');
 
-The :method:`Puli\\Repository\\ResourceRepositoryInterface::get` method accepts
-the path of a resource and returns a :class:`Puli\\Repository\\Resource\\ResourceInterface`.
+The :method:`Puli\\Repository\\Api\\ResourceRepository::get` method accepts
+the path of a resource and returns a :class:`Puli\\Repository\\Api\\Resource\\Resource`.
 
 If you want to retrieve multiple resources at once, use
-:method:`Puli\\Repository\\ResourceRepositoryInterface::find`. This method
-accepts a glob pattern and returns a
-:class:`Puli\\Repository\\Resource\\Collection\\ResourceCollectionInterface`:
+:method:`Puli\\Repository\\Api\\ResourceRepository::find`. This method accepts a
+glob pattern and returns a
+:class:`Puli\\Repository\\Resource\\Api\\ResourceCollection`:
 
 .. code-block:: php
 
@@ -35,7 +35,7 @@ accepts a glob pattern and returns a
     // => /css/style.css
 
 You can check whether a resource exists by passing its path to
-:method:`Puli\\Repository\\ResourceRepositoryInterface::contains`:
+:method:`Puli\\Repository\\Api\\ResourceRepository::contains`:
 
 .. code-block:: php
 
@@ -43,16 +43,16 @@ You can check whether a resource exists by passing its path to
         // ...
     }
 
-Like :method:`Puli\\Repository\\ResourceRepositoryInterface::find`, this method
+Like :method:`Puli\\Repository\\Api\\ResourceRepository::find`, this method
 also accepts glob patterns. If you pass a glob, the method will return ``true``
 only if at least one resource matched the pattern.
 
 Resources
 ---------
 
-The :method:`Puli\\Repository\\ResourceRepositoryInterface::get` method returns
-:class:`Puli\\Repository\\Resource\\ResourceInterface` instances. This interface lets you
-access the name and the repository path of the resource:
+The :method:`Puli\\Repository\\Api\\ResourceRepository::get` method returns
+:class:`Puli\\Repository\\Api\\Resource\\Resource` instances. This interface
+provides access to the name and the repository path of the resource:
 
 .. code-block:: php
 
@@ -64,89 +64,82 @@ access the name and the repository path of the resource:
     echo $resource->getPath();
     // => /css/style.css
 
-Resources don't necessarily have to be located on the file system. But those
-that do implement :class:`Puli\\Repository\\Filesystem\\Resource\\LocalResourceInterface`,
-which lets you access the file system path with
-:method:`Puli\\Repository\\Filesystem\\Resource\\LocalResourceInterface::getLocalPath`:
+Resources don't necessarily have to be located on the filesystem. But those
+that do implement :class:`Puli\\Repository\\Resource\\Api\\Resource\\FilesystemResource`,
+which lets you access the filesystem path with
+:method:`Puli\\Repository\\Resource\\Api\\Resource\\FilesystemResource::getFilesystemPath`:
 
 .. code-block:: php
 
     $resource = $repo->get('/css/style.css');
 
-    echo $resource->getLocalPath();
+    echo $resource->getFilesystemPath();
     // => /path/to/res/assets/css/style.css
 
-Files
------
-
-File resources implement the additional interface
-:class:`Puli\\Repository\\Resource\\FileResourceInterface`. With this interface, you can
-access the contents and file size (in bytes):
+Resources that have a body - such as files - implement
+:class:`Puli\\Repository\\Resource\\Api\\Resource\\BodyResource`. This interface
+lets you access the body with
+:method:`Puli\\Repository\\Resource\\Api\\Resource\\BodyResource::getBody`:
 
 .. code-block:: php
 
     $resource = $repo->get('/css/style.css');
 
-    echo $resource->getContents();
-    // => .container { ...
+    $css = $resource->getBody();
 
-    echo $resource->getSize();
-    // => 1049
+Child Resources
+---------------
 
-If you want to cache the file,
-:method:`Puli\\Repository\\Resource\\FileResourceInterface::getLastModifiedAt` returns the
-UNIX timestamp (seconds since January 1st, 1970) of when the file was last
-modified:
+Resources support child resources. One prime example is a filesystem directory
+which may contain other directories and files.
 
-.. code-block:: php
-
-    if ($resource->getLastModified() > $cacheTimestamp) {
-        // ...
-    }
-
-Directories
------------
-
-Directory resources implement the additional interface
-:class:`Puli\\Repository\\Resource\\DirectoryResourceInterface`. This way you can easily
-distinguish directories from files:
+You can access the children of a resource with the methods
+:method:`Puli\\Repository\\Api\\Resource\\Resource::getChild`,
+:method:`Puli\\Repository\\Api\\Resource\\Resource::hasChild` and
+:method:`Puli\\Repository\\Api\\Resource\\Resource::listChildren`:
 
 .. code-block:: php
 
-    use Puli\Repository\Resource\DirectoryResourceInterface;
+    $resource = $directory->getChild('style.css');
 
-    if ($resource instanceof DirectoryResourceInterface) {
+    if ($directory->hasChild('style.css')) {
         // ...
     }
 
-You can access the contents of a directory with the methods
-:method:`Puli\\Repository\\Resource\\DirectoryResourceInterface::get`,
-:method:`Puli\\Repository\\Resource\\DirectoryResourceInterface::contains` and
-:method:`Puli\\Repository\\Resource\\DirectoryResourceInterface::listEntries`:
+    foreach ($directory->listChildren() as $name => $resource) {
+        // ...
+    }
+
+Metadata
+--------
+
+Resources support the method
+:method:`Puli\\Repository\\Api\\Resource\\Resource::getMetadata` which returns
+a :class:`Puli\\Repository\\Api\\Resource\\ResourceMetadata` instance. This
+interface gives access to various metadata of a resource. For example, you can
+use :method:`Puli\\Repository\\Api\\Resource\\ResourceMetadata::getModificationTime`
+to access the UNIX timestamp of the resource's last modification. This is useful
+for caching:
 
 .. code-block:: php
 
-    $resource = $directory->get('style.css');
+    $resource = $repo->get('/css/style.css');
 
-    if ($directory->contains('style.css')) {
-        // ...
-    }
-
-    foreach ($directory->listEntries() as $name => $resource) {
-        // ...
+    if ($resource->getMetadata()->getModificationTime() > $cacheTimestamp) {
+        // refresh cache
     }
 
 Resource Collections
 --------------------
 
 When you fetch multiple resources from the repository, they are returned
-in a :class:`Puli\\Repository\\Resource\\Collection\\ResourceCollectionInterface`
+within a :class:`Puli\\Repository\\Resource\\Api\\ResourceCollection`
 instance. Resource collections offer convenience methods for accessing the names
 and the paths of all contained resources at once:
 
 .. code-block:: php
 
-    $resources = $locator->get('/css/*.css');
+    $resources = $repo->get('/css/*.css');
 
     print_r($resources->getNames());
     // Array
@@ -164,17 +157,10 @@ and the paths of all contained resources at once:
 
 Resource collections are traversable, countable and support
 :phpclass:`ArrayAccess`. When you still need the collection as array, call
-:method:`Puli\\Repository\\Resource\\Collection\\ResourceCollectionInterface::toArray`:
+:method:`Puli\\Repository\\Resource\\Api\\ResourceCollection::toArray`:
 
 .. code-block:: php
 
     $array = $resources->toArray();
-
-Further Reading
----------------
-
-* :doc:`mapping-resources` teaches you more about the configuration of
-  your repository.
-* :doc:`repositories` explains how to manage resource repositories manually.
 
 .. _Puli: https://github.com/puli/puli

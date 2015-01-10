@@ -22,7 +22,7 @@ Support
 -------
 
 If you are having problems, send a mail to bschussek@gmail.com or shout out to
-[@webmozart] on Twitter.
+[@PuliPHP] on Twitter.
 
 License
 -------
@@ -37,4 +37,5 @@ The documentation is licensed under the [MIT license].
 [issue tracker]: https://github.com/puli/docs/issues
 [Git repository]: https://github.com/puli/docs
 [@webmozart]: https://twitter.com/webmozart
+[@PuliPHP]: https://twitter.com/PuliPHP
 [MIT license]: LICENSE

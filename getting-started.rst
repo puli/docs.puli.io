@@ -18,29 +18,54 @@ Puli requires PHP 5.3.9 or higher.
 Stability
 ---------
 
-Puli is not yet available in a stable version. The latest release is
-|release|.
+Puli is not yet available in a stable version. The following table lists the
+current version of Puli's core components as well as their expected stable
+release dates:
+
+=================  =====================================  ============= ===================
+Component          Description                            Version       Stable Release
+=================  =====================================  ============= ===================
+Repository_        The PHP resource repository API        1.0.0-alpha4  Jan 2015
+Discovery_         The PHP resource discovery API         1.0.0-dev     Jan 2015
+Factory_           The factory API for Puli's services    1.0.0-dev     Jan 2015
+CLI_               The Command-Line Interface             1.0.0-alpha1  Feb-Mar 2015
+=================  =====================================  ============= ===================
 
 Installation
 ------------
 
-First, add Puli to your composer.json file:
+To install Puli, add Puli's components to your composer.json file:
 
 .. code-block:: json
 
     {
         "require": {
-            "puli/puli": "~1.0@dev"
+            "puli/repository": "~1.0",
+            "puli/discovery": "~1.0",
+            "puli/factory": "~1.0"
+        },
+        "require-dev": {
+            "puli/cli": "~1.0"
         },
         "minimum-stability": "dev"
     }
 
+.. tip::
+
+    You can omit the Discovery_ component if you don't need it.
+
 Run ``composer update`` to install the packages. Type ``vendor/bin/puli`` to
 check whether the Puli CLI was installed successfully:
 
-.. code-block:: bash
+.. code-block:: text
 
     $ vendor/bin/puli
+
+.. caution::
+
+    The leading ``$`` in the code examples is a convention that tells you that
+    the example contains shell code. Type the command that follows the dollar
+    sign in your terminal, but don't type the ``$`` itself.
 
 .. note::
 
@@ -52,13 +77,13 @@ directory to your path:
 
 * On Unix-based systems, add the following line to ~/.bashrc:
 
-    .. code-block:: text
+    .. code-block:: bash
 
         export PATH="$PATH:vendor/bin"
 
   Apply the changes with the ``source`` command:
 
-    .. code-block:: bash
+    .. code-block:: text
 
         $ source ~/.bashrc
 
@@ -74,115 +99,106 @@ directory to your path:
 
 Now you should be able to run ``puli`` without the ``vendor/bin/`` prefix.
 
-Mapping Application Resources
------------------------------
+Loading the Puli Factory
+------------------------
 
-By convention, the resources of applications are mapped to the Puli path
-``/app``. To do this, create a file named puli.json in the root directory of
-your project and insert the following contents:
-
-.. code-block:: json
-
-    {
-        "resources": {
-            "/app": "res"
-        }
-    }
-
-The left-hand side of the "resources" block contains Puli paths. The right-hand
-side points to paths in your project. In this example, the  Puli path ``/app``
-is mapped to the directory ``res`` in the project.
-
-Run ``puli dump`` to generate the resource repository:
-
-.. code-block:: bash
-
-    $ puli dump
-
-The generated repository can now be loaded and used in PHP:
+The Puli CLI generates a factory that creates Puli's core services for you. The
+class of the generated factory is stored in the constant PULI_FACTORY_CLASS:
 
 .. code-block:: php
 
-    $repo = require __DIR__.'/.puli/resource-repository.php';
+    $factoryClass = PULI_FACTORY_CLASS;
+    $factory = new $factoryClass();
 
-    echo $repo->get('/app/css/style.css')->getContents();
-
-Using Puli-Aware Packages
--------------------------
-
-*Puli-aware* Composer packages ship puli.json files just like the one in your
-application. For example, the puli.json file of the package "acme/blog" could
-look like this:
-
-.. code-block:: json
-
-    {
-        "resources": {
-            "/acme/blog": "res"
-        }
-    }
-
-The package maps the Puli path ``/acme/blog`` to its ``res`` directory. That
-directory - and all files therein - can be accessed by the Puli path
-``/acme/blog``:
+Use this factory to create Puli's :class:`Puli\\Repository\\Api\\ResourceRepository`
+and :class:`Puli\\Discovery\\Api\\ResourceDiscovery` instances:
 
 .. code-block:: php
 
-    echo $repo->get('/acme/blog/css/style.css')->getContents();
+    $repo = $factory->createRepository();
+    $discovery = $factory->createDiscovery($repo);
 
-.. note::
+These instances give you access to all resources mapped via the Puli CLI. For
+performance reasons, they should be created only once in your project and passed
+to all classes that require them.
 
-    By convention, the Puli paths of Composer packages always start with the
-    package's vendor and package name as top-level directories.
+Directory Layout Recommendation
+-------------------------------
 
-Using Puli-Unaware Packages
----------------------------
+We recommend to follow a certain directory layout in your project. This is by
+no means mandatory, but it will improve your experience when working with Puli.
 
-If you use a Composer package that does not ship a puli.json, you should submit
-a pull request that adds that file. Until the pull request is merged, you can
-manually map the package's resources in your application's puli.json:
+Most importantly, we recommend to separate PHP code and non-PHP resources into
+two separate top-level directories:
 
-.. code-block:: json
+.. code-block:: text
 
-    {
-        "resources": {
-            "/acme/blog": "@acme/blog:res"
-        }
-    }
+    src/
+        MyService.php
+        ...
+    res/
+        config/
+            config.yml
+        ...
 
-.. note::
+The names of these directories don't matter -- you can name them ``source``,
+``resources`` or whatever else you prefer. The important point is that the two
+directories do not overlap. If the directories overlap, both the class
+autoloader and the resource repository need to process unnecessary files.
 
-    The prefix ``@acme/blog:`` points to the install path of the "acme/blog"
-    package.
+Second, we recommend to use the following names for the sub-directories of the
+resource directory:
 
-Run ``puli dump`` to regenerate the resource repository. You can then access all
-files in the ``res`` directory of the package using the Puli path
-``/acme/blog``.
+.. code-block:: text
 
-If the "acme/blog" package is not installed when you dump the repository, you
-will get an exception. This is a problem if "acme/blog" is an optional
-dependency. To fix this, prefix the reference with ``@?``:
+    config/
+        ... configuration files ...
+    public/
+        css/
+            ... CSS files ...
+        js/
+            ... Javascript files ...
+        images/
+            ... images ...
+    trans/
+        ... translation files ...
+    views/
+        ... templates ...
 
-.. code-block:: json
+Using common names ensures a consistent user experience when referencing
+resources in your project and any other Puli-enabled package:
 
-    {
-        "resources": {
-            "/acme/blog": "@?acme/blog:res"
-        }
-    }
+.. code-block:: php
 
-If the "acme/blog" package is not installed, the above resource definition will
-now silently be ignored.
+    // Rendering an application template with Twig
+    $twig->render('/app/views/index.html');
+
+    // Rendering a package template with Twig
+    $twig->render('/acme/blog/views/post/show.html.twig');
+
+The public resources are bundled in a directory ``public`` because this way
+these resources can be easily copied to sub-directories of your public
+directory:
+
+.. code-block:: text
+
+    /app/public/* -> /public_html/
+    /acme/blog/public/* -> /public_html/blog/
+    ...
 
 Further Reading
 ---------------
 
-* :doc:`working-with-resources` explains how to use the resources returned
+* Read :doc:`mapping-resources` to learn how to map Puli paths to files and
+  directories.
+* Read :doc:`working-with-resources` to learn how to use the resources returned
   by the generated repository.
-* :doc:`mapping-resources` explains more details about the
-  repository configuration.
 
 .. _Puli: https://github.com/puli/puli
 .. _Puli CLI: https://github.com/puli/cli
 .. _Composer Plugin: https://github.com/puli/composer-plugin
 .. _Composer: https://getcomposer.org
+.. _Repository: https://github.com/puli/repository
+.. _Discovery: https://github.com/puli/discovery
+.. _Factory: https://github.com/puli/factory
+.. _CLI: https://github.com/puli/cli
