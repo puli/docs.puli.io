@@ -131,6 +131,12 @@ These instances give you access to all resources mapped via the Puli CLI. For
 performance reasons, they should be created only once in your project and passed
 to all classes that require them.
 
+.. note::
+
+    If you are developing a reusable Composer package, you should not create
+    the repository yourself. Instead, let the application that uses your package
+    pass the repository to your classes.
+
 Directory Layout Recommendation
 -------------------------------
 
