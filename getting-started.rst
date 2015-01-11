@@ -42,9 +42,7 @@ To install Puli, add Puli's components to your composer.json file:
         "require": {
             "puli/repository": "~1.0",
             "puli/discovery": "~1.0",
-            "puli/factory": "~1.0"
-        },
-        "require-dev": {
+            "puli/factory": "~1.0",
             "puli/cli": "~1.0"
         },
         "minimum-stability": "dev"
