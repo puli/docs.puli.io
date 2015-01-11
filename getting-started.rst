@@ -34,26 +34,19 @@ CLI_               The Command-Line Interface             1.0.0-alpha1  Feb-Mar 
 Installation
 ------------
 
-To install Puli, add Puli's components to your composer.json file:
+To install Puli, add the Puli CLI to your composer.json file:
 
 .. code-block:: json
 
     {
         "require": {
-            "puli/repository": "~1.0",
-            "puli/discovery": "~1.0",
-            "puli/factory": "~1.0",
             "puli/cli": "~1.0"
         },
         "minimum-stability": "dev"
     }
 
-.. tip::
-
-    You can omit the Discovery_ component if you don't need it.
-
-Run ``composer update`` to install the packages. Type ``vendor/bin/puli`` to
-check whether the Puli CLI was installed successfully:
+Run ``composer update`` to install the package. Type ``vendor/bin/puli`` to
+check whether the CLI was installed successfully:
 
 .. code-block:: text
 
