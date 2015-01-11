@@ -63,21 +63,6 @@ specific requirements depend on where you install Puli:
           "minimum-stability": "dev"
       }
 
-* A reusable framework  package:
-
-  .. code-block:: json
-
-      {
-          "require": {
-              "puli/repository": "~1.0",
-              "puli/discovery": "~1.0"
-          },
-          "require-dev": {
-              "puli/cli": "~1.0"
-          },
-          "minimum-stability": "dev"
-      }
-
 Run ``composer update`` to install the package. Type ``vendor/bin/puli`` to
 check whether the CLI was installed successfully:
 
