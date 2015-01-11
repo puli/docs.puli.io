@@ -134,8 +134,8 @@ to all classes that require them.
 .. note::
 
     If you are developing a reusable Composer package, you should not create
-    the repository yourself. Instead, let the application that uses your package
-    pass the repository to your classes.
+    the repository and the discovery yourself. Instead, let the application that
+    uses your package pass them to your classes.
 
 Directory Layout Recommendation
 -------------------------------
