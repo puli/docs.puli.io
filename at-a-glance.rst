@@ -131,8 +131,10 @@ with "puli://":
 Resource Discovery
 ------------------
 
-Very often, libraries support specific types of files. For example, the
-`Doctrine ORM`_ is able to load entity mappings from XML files:
+Many tools require you to provide configuration, translations or other content
+in files of specific types. For example, the `Doctrine ORM`_ is able to load
+the configuration of a ``MyProject\User`` entity from a
+``MyProject.User.dcm.xml`` file:
 
 .. code-block:: xml
 
@@ -143,8 +145,8 @@ Very often, libraries support specific types of files. For example, the
         </entity>
     </doctrine-mapping>
 
-Registering this file -- and all other such files in your project *and* its
-installed packages -- with Doctrine's classes requires significant effort.
+Registering all such mappings with Doctrine requires some effort, especially
+once the mappings are spread across several Composer packages.
 
 Puli supports a very simple resource discovery mechanism to solve this problem.
 Libraries define *binding types* for the resources they want to process:
@@ -153,7 +155,7 @@ Libraries define *binding types* for the resources they want to process:
 
     $ puli type define doctrine/xml-mapping
 
-Your project (and its installed packages) can now *bind* resources to these
+Your project and any other Composer package can now *bind* resources to these
 types:
 
 .. code-block:: text
@@ -161,7 +163,7 @@ types:
     $ puli bind /app/config/doctrine/*.xml doctrine/xml-mapping
 
 The library finally uses Puli's :class:`Puli\\Discovery\\Api\\ResourceDiscovery`
-to find all resources bound to the type "doctrine/xml-mapping":
+to access all the resources bound to the type "doctrine/xml-mapping":
 
 .. code-block:: php
 
@@ -171,7 +173,7 @@ to find all resources bound to the type "doctrine/xml-mapping":
         }
     }
 
-Bindings of installed packages are not enabled by default:
+When you install a Composer package, its bindings are not enabled by default:
 
 .. code-block:: text
 
@@ -182,7 +184,7 @@ Bindings of installed packages are not enabled by default:
         acme/blog
         fc20d8 /acme/blog/config/doctrine/*.xml doctrine/xml-mapping
 
-This way you can selectively control which bindings you want to enable in your
+This way you can selectively control which bindings you want to use in your
 project.
 
 Further Reading
