@@ -163,7 +163,7 @@ types:
     $ puli bind /app/config/doctrine/*.xml doctrine/xml-mapping
 
 The library finally uses Puli's :class:`Puli\\Discovery\\Api\\ResourceDiscovery`
-to access all the resources bound to the type "doctrine/xml-mapping":
+to access all the resources bound to its type:
 
 .. code-block:: php
 
