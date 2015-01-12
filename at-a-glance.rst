@@ -132,7 +132,7 @@ Resource Discovery
 ------------------
 
 Many tools require you to provide configuration, translations or other content
-in files of specific types. For example, the `Doctrine ORM`_ is able to load
+in files of specific formats. For example, the `Doctrine ORM`_ is able to load
 the configuration of a ``MyProject\User`` entity from a
 ``MyProject.User.dcm.xml`` file:
 
@@ -145,8 +145,8 @@ the configuration of a ``MyProject\User`` entity from a
         </entity>
     </doctrine-mapping>
 
-Registering all such mappings with Doctrine requires some effort, especially
-once the mappings are spread across several Composer packages.
+Registering all such files with the tool that uses them requires some effort,
+especially once they are spread across several Composer packages.
 
 Puli supports a very simple resource discovery mechanism to solve this problem.
 Libraries define *binding types* for the resources they want to process:
