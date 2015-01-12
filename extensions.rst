@@ -20,9 +20,9 @@ The following table points you to the documentation of the individual extensions
 =================  =====================================  ============
 Tool               Documentation                          Version
 =================  =====================================  ============
-Twig_              :doc:`extensions/twig`                 1.0.0-dev
-Symfony_           :doc:`extensions/symfony-framework`    1.0.0-dev
-`Symfony Config`_  :doc:`extensions/symfony-config`       1.0.0-dev
+Twig_              :doc:`extensions/twig`                 1.0.0-beta
+Symfony_           :doc:`extensions/symfony-framework`    1.0.0-beta
+`Symfony Config`_  :doc:`extensions/symfony-config`       1.0.0-beta
 Assetic_           tbd                                    1.0.0-dev
 =================  =====================================  ============
 
