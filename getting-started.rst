@@ -45,7 +45,7 @@ specific requirements depend on where you install Puli:
           "require": {
               "puli/cli": "~1.0"
           },
-          "minimum-stability": "dev"
+          "minimum-stability": "beta"
       }
 
 * A reusable Composer package:
@@ -60,7 +60,7 @@ specific requirements depend on where you install Puli:
           "require-dev": {
               "puli/cli": "~1.0"
           },
-          "minimum-stability": "dev"
+          "minimum-stability": "beta"
       }
 
 Run ``composer update`` to install the package. Type ``vendor/bin/puli`` to
