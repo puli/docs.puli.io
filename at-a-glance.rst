@@ -34,7 +34,7 @@ map paths in the repository to files or directories in your project with
     $ puli map /app res
 
 Here, the *Puli path* ``/app`` is mapped to the directory ``res`` in our project.
-This allows to to access any file in the ``res`` directory by a Puli path:
+This allows to access any file in the ``res`` directory by a Puli path:
 
 .. code-block:: php
 
