@@ -51,10 +51,10 @@ Composer Integration
 --------------------
 
 When you type ``puli map``, the mappings are saved in a puli.json file in the
-root of your project. This file needs to be committed to your Version Control
-System (for example Git) and distributed with the project.
+root of your package. This file needs to be committed to your Version Control
+System (for example Git) and distributed with the package.
 
-If your project depends on other libraries through Composer, you can access the
+If your package depends on other libraries through Composer, you can access the
 resources mapped by these libraries thanks to Puli's `Composer plugin`_.
 For example, assume that the author of the "acme/blog" package distributes a
 puli.json file with the following mapping:
