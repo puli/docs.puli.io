@@ -242,8 +242,8 @@ server and the production server:
 .. code-block:: text
 
     $ puli target add dev public_html
-    $ puli target add staging /var/www/staging/public_html --installer copy
-    $ puli target add prod /var/www/prod/public_html --installer copy
+    $ puli target add staging /var/www/staging/static --installer copy
+    $ puli target add prod /var/www/prod/static --installer copy
 
 Puli sets the first added target as default target. The default target is marked
 with a star ``*`` in the output of ``puli target``:
