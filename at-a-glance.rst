@@ -118,15 +118,15 @@ the `Doctrine ORM`_ package could define the binding type
 
     $ puli type define doctrine/xml-mapping
 
-Any package that ships Doctrine entities maps their XML configuration files to
-that binding type:
+Any package that ships Doctrine entities maps its XML mapping files to that
+binding type:
 
 .. code-block:: text
 
     $ puli bind /acme/blog/config/doctrine/*.xml doctrine/xml-mapping
 
 With Puli's :class:`Puli\\Discovery\\Api\\ResourceDiscovery`, Doctrine is able
-to load all files bound to the ``doctrine/xml-mapping`` type:
+to load these files:
 
 .. code-block:: php
 
@@ -137,8 +137,7 @@ to load all files bound to the ``doctrine/xml-mapping`` type:
     }
 
 Thanks to Puli's resource discovery, the files and classes in your installed
-packages are wired together automatically. Yes, you can also disable the
-bindings that you don't use in your project.
+packages are wired together automatically.
 
 Read :doc:`discovery` if you want to learn more.
 
