@@ -62,8 +62,8 @@ The ``puli web add`` command takes two parameters:
 * a path in the install target.
 
 With the above commands, we mapped the ``/app/public`` directory to the root
-directory of our install target - hence ``public_html/``, and the directories
-``/acme/blog/css`` and ``/acme/blog/css`` to the sub-directory
+directory of our install target -- hence ``public_html`` -- and the directories
+``/acme/blog/css`` and ``/acme/blog/js`` to the sub-directory
 ``public_html/blog``.
 
 We can display the current mappings by running ``puli web``:
