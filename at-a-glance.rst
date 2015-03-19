@@ -1,94 +1,74 @@
 Puli at a Glance
 ================
 
-Puli_ (pronounced "poo-lee") is a PHP library that manages files, directories
-and other resources in a repository - much like a virtual filesystem.
-*Resources* can be anything, but usually we use the term for machine-processed
-files that are *not* PHP, such as CSS, JavaScript, XLIFF, YAML, XML or HTML
-files.
+Puli_ (pronounced "poo-lee") is a PHP library based on Composer_ that manages
+the resources of your project and its dependencies. *Resources* can be anything,
+but usually we use the term for machine-processed files that are *not* PHP, such
+as CSS, JavaScript, XLIFF, YAML, XML or HTML files.
 
-Why Puli?
----------
+Puli is efficient, platform-agnostic and independent of any single framework.
 
-Many people use Composer_ to distribute their packages. These packages contain
-both PHP files and resources that are used by the application. Loading PHP files
-is easy, thanks to PSR-4_ and Composer's generated autoloader. Loading resources,
-however, requires using absolute file paths with plenty of ``..`` segments or
-inventing some sort of naming convention, which varies from project to project:
-
-.. code-block:: jinja
-
-    {% include 'AcmeBlogBundle::footer.html.twig' %}
-
-Puli offers a platform- and framework-agnostic solution to this problem.
-
-Repositories
-------------
-
-At its core, Puli provides a simple repository, much like a filesystem. You can
-map paths in the repository to files or directories in your project with
-`Puli's Command Line Interface`_ (CLI):
-
-.. code-block:: text
-
-    $ puli map /app res
-
-Here, the *Puli path* ``/app`` is mapped to the directory ``res`` in our project.
-This allows to to access any file in the ``res`` directory by a Puli path:
-
-.. code-block:: php
-
-    // res/views/index.html
-    echo $repo->get('/app/views/index.html')->getBody();
-
-.. note::
-
-    The variable ``$repo`` contains a
-    :class:`Puli\\Repository\\Api\\ResourceRepository` instance. You will learn
-    in :doc:`getting-started` how to load this object.
-
-Composer Integration
---------------------
-
-When you type ``puli map``, the mappings are saved in a puli.json file in the
-root of your project. This file needs to be committed to your Version Control
-System (for example Git) and distributed with the project.
-
-If your project depends on other libraries through Composer, you can access the
-resources mapped by these libraries thanks to Puli's `Composer plugin`_.
-For example, assume that the author of the "acme/blog" package distributes a
-puli.json file with the following mapping:
-
-.. code-block:: text
-
-    $ puli map /acme/blog res
-
-When you install the "acme/blog" package, you can access any resources of the
-package's ``res`` directory through the Puli path ``/acme/blog``:
-
-.. code-block:: php
-
-    // vendor/acme/blog/res/views/index.html
-    echo $repo->get('/acme/blog/views/index.html')->getBody();
-
-Tool Integration
+Resource Loading
 ----------------
 
-Puli provides integration layers for several PHP libraries. The
-`Twig extension`_, for example, can be used to load Twig templates via Puli
-paths:
+Just like Composer builds a PSR-4_ autoloader that knows how to load your
+classes, Puli builds a *resource repository* from the files in your packages.
+You can load these files using normalized paths. These *Puli paths* start with
+the name of the package:
+
+.. code-block:: php
+
+    echo $twig->render('/acme/blog/views/footer.html.twig');
+
+Every package developer is responsible for mapping their resources with the
+"map" command of `Puli's Command Line Interface`_ (CLI):
+
+.. code-block:: text
+
+    # Map the prefix "/acme/blog" to the "res" directory
+    $ puli map /acme/blog res
+
+The configuration is stored in a `puli.json` file that is distributed with the
+package - just like `composer.json`. Puli reads the `puli.json` files of all
+installed packages and makes their resources available to your project.
+
+Read :doc:`mapping-resources` if you want to learn more.
+
+Web Resources
+-------------
+
+Some resources - such as templates or configuration files - are needed by the
+web server only. Others - like CSS and JavaScript files - need to be placed in
+a public directory, so that browsers can download them.
+
+`Puli's Web Resource Plugin`_ provides a generic solution for this problem.
+With that plugin, you can map resources to paths in so-called *install targets*
+(local directories, web servers, CDNs, ...):
+
+.. code-block:: text
+
+    # Publish resources to the "public_html" directory
+    $ puli target add local public_html
+
+    # Map the "acme/blog" resources to the "public_html/blog" directory
+    $ puli web add /acme/blog/public /blog
+
+Puli's "web install" command takes care of copying the resources to their
+targets:
+
+.. code-block:: text
+
+    $ puli web install
+    Installing /acme/blog/public into public_html/blog via symlink...
+
+With Puli's URL generator, you can finally generate the URLs for the published
+resources. The following example uses `Puli's Twig Extension`_:
 
 .. code-block:: jinja
 
-    {% include '/acme/blog/views/footer.html.twig' %}
+    <img src="{{ resource_url('/acme/blog/images/header.png') }}" />
 
-The `Symfony bridge`_ permits the use of Puli paths in configuration files:
-
-.. code-block:: yaml
-
-    # routing.yml
-    _acme_blog:
-        resource: /acme/blog/config/routing.yml
+Read :doc:`web-resources` if you want to learn more.
 
 Resource Overriding
 -------------------
@@ -196,8 +176,8 @@ Further Reading
 .. _Composer: https://getcomposer.org
 .. _PSR-4: http://www.php-fig.org/psr/psr-4/
 .. _Puli's Command Line Interface: https://github.com/puli/cli
+.. _`Puli's Web Resource Plugin`: https://github.com/puli/web-resource-plugin
 .. _Composer plugin: https://github.com/puli/composer-plugin
-.. _Twig extension: https://github.com/puli/twig-extension
-.. _Symfony bridge: https://github.com/puli/symfony-bridge
+.. _Puli's Twig Extension: https://github.com/puli/twig-extension
 .. _stream wrapper: http://php.net/manual/en/intro.stream.php
 .. _Doctrine ORM: http://www.doctrine-project.org/projects/orm.html
