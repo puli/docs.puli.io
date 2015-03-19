@@ -34,6 +34,23 @@ installed packages and makes their resources available to your project.
 
 Read :doc:`mapping-resources` if you want to learn more.
 
+Resource Overriding
+-------------------
+
+When working with third-party packages, it is often necessary to customize
+files provided by these packages. With Puli this becomes a no-brainer: You
+simply copy the files to your project and override the path mappings:
+
+.. code-block:: text
+
+    $ puli map /acme/blog/views/footer.html res/views/footer.html
+
+
+The file ``res/views/footer.html`` stored in your project will now be used
+whenever the resource ``/acme/blog/views/footer.html`` is requested.
+
+Read :doc:`mapping-resources` if you want to learn more.
+
 Web Resources
 -------------
 
@@ -70,21 +87,6 @@ resources. The following example uses `Puli's Twig Extension`_:
 
 Read :doc:`web-resources` if you want to learn more.
 
-Resource Overriding
--------------------
-
-When working with third-party packages, it is often necessary to customize
-files provided by these packages. With Puli this becomes a no-brainer: You
-simply copy the files to your project and override the path mappings:
-
-.. code-block:: text
-
-    $ puli map /acme/blog/views/footer.html res/views/footer.html
-
-
-The file ``res/views/footer.html`` stored in your project will now be used
-whenever the resource ``/acme/blog/views/footer.html`` is requested.
-
 Stream Wrappers
 ---------------
 
@@ -93,19 +95,10 @@ can use Puli resources like ordinary files:
 
 .. code-block:: php
 
-    use Puli\Repository\StreamWrapper\ResourceStreamWrapper;
-
-    ResourceStreamWrapper::register('puli', $repo);
-
-In this example, the resource repository is registered for the "puli://" scheme
-through Puli's :class:`Puli\\Repository\\StreamWrapper\\ResourceStreamWrapper`.
-Now you can access Puli resources like normal files, as long as you prefix them
-with "puli://":
-
-.. code-block:: php
-
     // vendor/acme/blog/res/trans/en.yml
     echo file_get_contents('puli:///acme/blog/trans/en.yml');
+
+Read :doc:`stream-wrapper` if you want to learn more.
 
 Resource Discovery
 ------------------
