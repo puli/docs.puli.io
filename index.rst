@@ -8,6 +8,7 @@ Welcome to Puli's documentation!
    getting-started
    mapping-resources
    working-with-resources
+   web-resources
    discovery
    stream-wrapper
    components
@@ -50,6 +51,7 @@ The documentation contains the following sections:
 * :doc:`getting-started`
 * :doc:`mapping-resources`
 * :doc:`working-with-resources`
+* :doc:`web-resources`
 * :doc:`discovery`
 * :doc:`stream-wrapper`
 

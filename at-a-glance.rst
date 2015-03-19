@@ -143,7 +143,7 @@ Further Reading
 .. _Composer: https://getcomposer.org
 .. _PSR-4: http://www.php-fig.org/psr/psr-4/
 .. _Puli's Command Line Interface: https://github.com/puli/cli
-.. _`Puli's Web Resource Plugin`: https://github.com/puli/web-resource-plugin
+.. _Puli's Web Resource Plugin: https://github.com/puli/web-resource-plugin
 .. _Composer plugin: https://github.com/puli/composer-plugin
 .. _Puli's Twig Extension: https://github.com/puli/twig-extension
 .. _stream wrapper: http://php.net/manual/en/intro.stream.php
