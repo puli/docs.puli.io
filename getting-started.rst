@@ -7,8 +7,8 @@
 Getting Started
 ===============
 
-This section explains how to get started quickly with Puli_. If you don't know
-what Puli is or why you should use it, read :doc:`at-a-glance` first.
+This section explains how to get started with Puli_. If you don't know what Puli
+is or why you should use it, read :doc:`at-a-glance` first.
 
 Requirements
 ------------
@@ -25,10 +25,10 @@ release dates:
 =================  =====================================  ============= ===================
 Component          Description                            Version       Stable Release
 =================  =====================================  ============= ===================
-Repository_        The PHP resource repository API        1.0.0-beta    Jan 2015
-Discovery_         The PHP resource discovery API         1.0.0-beta    Jan 2015
-Factory_           The factory API for Puli's services    1.0.0-beta    Jan 2015
-CLI_               The Command-Line Interface             1.0.0-beta    Feb-Mar 2015
+Repository_        The PHP resource repository API        1.0.0-beta    April 2015
+Discovery_         The PHP resource discovery API         1.0.0-beta    April 2015
+Factory_           The factory API for Puli's services    1.0.0-beta    April 2015
+CLI_               The Command-Line Interface             1.0.0-beta    April 2015
 =================  =====================================  ============= ===================
 
 Installation
@@ -80,6 +80,9 @@ check whether the CLI was installed successfully:
 
     If "vendor-dir" or "bin-dir" is set in composer.json, the path to the
     ``puli`` command will be different.
+
+Optional: Add Shortcut to Puli
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To save you from typing ``vendor/bin/puli`` all the time, add the ``vendor/bin``
 directory to your path:
