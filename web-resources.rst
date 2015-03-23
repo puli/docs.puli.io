@@ -21,7 +21,19 @@ You can install the plugin with Composer_:
 
 .. code-block:: text
 
-    $ composer require puli/web-resource-plugin:~1.0@beta
+    $ composer require puli/web-resource-plugin:~1.0
+
+.. note::
+
+    Make sure that the "minimum-stability" setting is set to "beta" in
+    composer.json, otherwise the installation will fail:
+
+    .. code-block:: json
+
+        {
+            ...,
+            "minimum-stability": "beta"
+        }
 
 Before the plugin can be used, it needs to be enabled with the Puli CLI:
 

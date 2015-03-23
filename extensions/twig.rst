@@ -18,9 +18,21 @@ package to composer.json:
 
     {
         "require": {
-            "puli/twig-extension": "~1.0@dev"
+            "puli/twig-extension": "~1.0"
         }
     }
+
+.. note::
+
+    Make sure that the "minimum-stability" setting is set to "beta" in
+    composer.json, otherwise the installation will fail:
+
+    .. code-block:: json
+
+        {
+            ...,
+            "minimum-stability": "beta"
+        }
 
 Run ``composer install`` to install the extension.
 

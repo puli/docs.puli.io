@@ -21,9 +21,21 @@ First you need to install the `Puli bridge`_ with Composer_. Add the
 
     {
         "require": {
-            "puli/symfony-bridge": "~1.0@dev"
+            "puli/symfony-bridge": "~1.0"
         }
     }
+
+.. note::
+
+    Make sure that the "minimum-stability" setting is set to "beta" in
+    composer.json, otherwise the installation will fail:
+
+    .. code-block:: json
+
+        {
+            ...,
+            "minimum-stability": "beta"
+        }
 
 Run ``composer install`` to install the extension.
 

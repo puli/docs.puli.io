@@ -38,18 +38,18 @@ following command in a terminal:
 
 .. code-block:: text
 
-    $ composer require "puli/symfony-bundle:~1.0@dev"
+    $ composer require "puli/symfony-bundle:~1.0"
 
 .. note::
 
-    Make sure that the "minimum-stability" setting is set to "dev" in
+    Make sure that the "minimum-stability" setting is set to "beta" in
     composer.json, otherwise the installation will fail:
 
     .. code-block:: json
 
         {
             ...,
-            "minimum-stability": "dev"
+            "minimum-stability": "beta"
         }
 
 This will download the bundle to your project.
