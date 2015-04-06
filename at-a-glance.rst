@@ -20,6 +20,13 @@ the name of the package:
 
     echo $twig->render('/acme/blog/views/footer.html.twig');
 
+The only exceptions are end-user applications, which have the prefix ``/app`` by
+convention:
+
+.. code-block:: php
+
+    echo $twig->render('/app/views/footer.html.twig');
+
 Every package developer is responsible for mapping their resources with the
 "map" command of `Puli's Command Line Interface`_ (CLI):
 
@@ -51,14 +58,15 @@ whenever the resource ``/acme/blog/views/footer.html`` is requested.
 
 Read :doc:`mapping-resources` if you want to learn more.
 
-Web Resources
--------------
+Web Assets
+----------
 
 Some resources - such as templates or configuration files - are needed by the
 web server only. Others - like CSS files and images - need to be placed in
-a public directory, where browsers can download them.
+a public directory, where browsers can download them. We'll call these resources
+*web assets*.
 
-`Puli's Web Resource Plugin`_ provides a generic solution for this problem.
+`Puli's Asset Plugin`_ provides a generic solution for this problem.
 With that plugin, you can map resources to paths in so-called *install targets*
 (local directories, web servers, CDNs, ...):
 
@@ -68,14 +76,14 @@ With that plugin, you can map resources to paths in so-called *install targets*
     $ puli target add local public_html
 
     # Map resources to the "public_html/blog" directory
-    $ puli web add /acme/blog/public /blog
+    $ puli asset map /acme/blog/public /blog
 
-Puli's "web install" command takes care of copying the resources to their
+Puli's "asset install" command takes care of copying the resources to their
 targets:
 
 .. code-block:: text
 
-    $ puli web install
+    $ puli asset install
     Installing /acme/blog/public into public_html/blog via symlink...
 
 With Puli's URL generator, you can finally generate the URLs for the published
@@ -83,7 +91,7 @@ resources. The following example uses `Puli's Twig Extension`_:
 
 .. code-block:: jinja
 
-    <img src="{{ resource_url('/acme/blog/images/header.png') }}" />
+    <img src="{{ asset_url('/acme/blog/images/header.png') }}" />
 
 Read :doc:`web-resources` if you want to learn more.
 
@@ -143,7 +151,7 @@ Further Reading
 .. _Composer: https://getcomposer.org
 .. _PSR-4: http://www.php-fig.org/psr/psr-4/
 .. _Puli's Command Line Interface: https://github.com/puli/cli
-.. _Puli's Web Resource Plugin: https://github.com/puli/web-resource-plugin
+.. _Puli's Asset Plugin: https://github.com/puli/asset-plugin
 .. _Composer plugin: https://github.com/puli/composer-plugin
 .. _Puli's Twig Extension: https://github.com/puli/twig-extension
 .. _stream wrapper: http://php.net/manual/en/intro.stream.php

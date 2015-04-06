@@ -1,16 +1,15 @@
-Web Resources
-=============
+Web Assets
+==========
 
 Some resources - such as templates or configuration files - are needed by the
 web server only. Others - like CSS files and images - need to be placed in a
 public directory, where browsers can download them. We'll call these files
-*web resources* here.
+*web assets* here.
 
-Puli's `Web Resource Plugin`_ takes care of:
+Puli's `Asset Plugin`_ takes care of:
 
-* installing web resources to their public destination (public directories,
-  CDNs, ...);
-* generating the URLs for these resources.
+* installing assets to their public destination (public directories, CDNs, ...);
+* generating the URLs for these assets.
 
 Read this guide to learn everything about handling web resources with Puli.
 
@@ -21,54 +20,68 @@ You can install the plugin with Composer_:
 
 .. code-block:: text
 
-    $ composer require puli/web-resource-plugin:~1.0
+    $ composer require puli/asset-plugin:~1.0
 
 .. note::
 
-    Make sure that the "minimum-stability" setting is set to "beta" in
+    Make sure that the "minimum-stability" setting is set to "dev" in
     composer.json, otherwise the installation will fail:
 
     .. code-block:: json
 
         {
             ...,
-            "minimum-stability": "beta"
+            "minimum-stability": "dev"
         }
 
 Before the plugin can be used, it needs to be enabled with the Puli CLI:
 
 .. code-block:: text
 
-    $ puli plugin install Puli\\WebResourcePlugin\\Api\\WebResourcePlugin
+    $ puli plugin install Puli\\AssetPlugin\\Api\\AssetPlugin
 
-Installing Web Resources
-------------------------
+Install Targets
+---------------
 
-Puli installs web resources to paths in so-called *install targets*. An install
-target is any publicly accessible location, such as:
+The public location for installing resources is called an *install target* in
+Puli's language. Puli supports virtually any kind of install target, such as:
 
-* a public directory of the web-server itself;
-* a public directory of a different web-server;
-* a public directory of a Content Delivery Network (CDN).
+* the document root of your own web server
+* the document root of another web server
+* a Content Delivery Network (CDN)
 
-Since we don't have an install target yet, we will create a new one:
+Install targets store three pieces of information:
+
+* their location (a directory path, a URL, …)
+* the used installer (symlink, copy, ftp, rsync, …)
+` their URL format
+
+The URL format is used to generate URLs for the resources installed in the
+target. The default format is ``/%s``, but you could set it to more elaborate
+values such as ``http://cdn.example.com/path/%s?v3``.
+
+Install targets can be created with the ``puli target add`` command. We need to
+create at least one target:
 
 .. code-block:: text
 
     $ puli target add local public_html
 
 With this command, we added a target named "local" that points to the
-``public_html`` directory in our project. For now, this is all we need. You
-will learn more about install targets later in this guide.
+``public_html`` directory in our project.
 
-Next, we will map resources to paths in the target:
+Installing Web Assets
+---------------------
+
+Now that the install target is set up, we can map resources to paths in the
+target:
 
 .. code-block:: text
 
-    $ puli web add /app/public /
-    $ puli web add "/acme/blog/{css,js}" /blog
+    $ puli asset map /app/public /
+    $ puli asset map "/acme/blog/{css,js}" /blog
 
-The ``puli web add`` command takes two parameters:
+The ``puli asset map`` command takes two parameters:
 
 * a path (or glob) of a Puli resource;
 * a path in the install target.
@@ -78,11 +91,11 @@ directory of our install target -- hence ``public_html`` -- and the directories
 ``/acme/blog/css`` and ``/acme/blog/js`` to the sub-directory
 ``public_html/blog``.
 
-We can display the current mappings by running ``puli web``:
+We can display the current mappings by running ``puli asset``:
 
 .. code-block:: text
 
-    The following web resources are currently enabled:
+    The following web assets are currently enabled:
 
         Target default (alias of: local)
         Location:   public_html
@@ -92,42 +105,42 @@ We can display the current mappings by running ``puli web``:
             54b31b /app/public         /
             d7c042 /acme/blog/{css,js} /blog
 
-    Use "puli web install" to install the resources in their targets.
+    Use "puli asset install" to install the assets in their targets.
 
-At last, we will install the resources by running ``puli web install``:
+At last, we will install the resources by running ``puli asset install``:
 
 .. code-block:: text
 
-    $ puli web install
+    $ puli asset install
     Installing /app/public into public_html via symlink...
     Installing /acme/blog/css into public_html/blog/css via symlink...
     Installing /acme/blog/js into public_html/blog/js via symlink...
 
-The resources are installed in the ``public_html`` directory by creating
+The assets are installed in the ``public_html`` directory by creating
 symbolic links. We will learn how to change the installation method in the
 `Installers`_ section later in this guide.
 
 Generating Resource URLs
 ------------------------
 
-Now that the resources are published, we need to let browsers know where the
+Now that the assets are published, we need to let browsers know where the
 resources can be downloaded. With `Puli's Twig Extension`_, you can use the
-``resource_url()`` function, which accepts a resource path and returns the
+``asset_url()`` function, which accepts a resource path and returns the
 URL of the resource:
 
 .. code-block:: jinja
 
     {# /images/header.png #}
-    <img src="{{ resource_url('/app/public/images/header.png') }}" />
+    <img src="{{ asset_url('/app/public/images/header.png') }}" />
 
 You can also pass a path relative to the Puli path of your template:
 
 .. code-block:: jinja
 
-    <img src="{{ resource_url('../images/header.png') }}" />
+    <img src="{{ asset_url('../images/header.png') }}" />
 
 If you want to generate resource URLs in your own libraries, use the
-:class:`Puli\\WebResourcePlugin\\Api\\UrlGenerator\\ResourceUrlGenerator` that
+:class:`Puli\\AssetPlugin\\Api\\UrlGenerator\\ResourceUrlGenerator` that
 is returned by the Puli factory:
 
 .. code-block:: php
@@ -145,11 +158,11 @@ Custom URL Formats
 
 By default, Puli generates URLs with the format ``/%s``, where ``%s`` is
 replaced by the resource's path relative to the install target.
-Let's run ``puli web`` again to get a better understanding:
+Let's run ``puli asset`` again to get a better understanding:
 
 .. code-block:: text
 
-    The following web resources are currently enabled:
+    The following web assets are currently enabled:
 
         Target default (alias of: local)
         Location:   public_html
@@ -159,7 +172,7 @@ Let's run ``puli web`` again to get a better understanding:
             54b31b /app/public         /
             d7c042 /acme/blog/{css,js} /blog
 
-    Use "puli web install" to install the resources in their targets.
+    Use "puli web install" to install the assets in their targets.
 
 Since ``/app/public`` is mapped to the root of the install target, Puli
 generates the URL ``/images/header.png`` for the resource
@@ -181,29 +194,29 @@ header image.
 Sub-Directories of the Document Root
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you publish your resources in a sub-directory of your document root, you
+If you publish your assets in a sub-directory of your document root, you
 need to adjust the URL format correspondingly:
 
 .. code-block:: text
 
     $ puli target add local public_html/assets --url-format /assets/%s
 
-We told Puli to publish the resources of the target in the ``assets``
+We told Puli to publish the assets of the target in the ``assets``
 sub-directory. Likewise, we had to adjust the URL format to ``/assets/%s``, so
 that the generated URLs use the ``/assets/`` prefix.
 
-Resource Versioning
-~~~~~~~~~~~~~~~~~~~
+Asset Versioning
+~~~~~~~~~~~~~~~~
 
-Another use case for changing the URL format is resource versioning. Let's
-add the query string ``?v1`` to the URLs of all resources in our target:
+Another use case for changing the URL format is asset versioning. Let's add the
+query string ``?v1`` to the URLs of all resources in our target:
 
 .. code-block:: text
 
     $ puli target add local public_html --url-format /%s?v1
 
 If you release a new version of your application, you only have to update the
-URL format to force all browsers to reload your resources instead of using the
+URL format to force all browsers to reload your assets instead of using the
 cached version:
 
 .. code-block:: text
@@ -213,13 +226,13 @@ cached version:
 Installers
 ----------
 
-Puli supports different resource installers:
+Puli supports different asset installers:
 
 ================= ==============================================
 Installer         Description
 ================= ==============================================
-symlink (default) Publishes resources by creating symbolic links
-copy              Publishes resources using hard copies
+symlink (default) Creates asset symlinks in a target directory
+copy              Copies assets to a target directory
 ================= ==============================================
 
 You can select the used installer when creating the install target:
@@ -230,7 +243,7 @@ You can select the used installer when creating the install target:
 
 In future versions of Puli, more installers (ftp, rsync, ...) will be added.
 You can also create a custom installer by implementing the
-:class:`Puli\\WebResourcePlugin\\Api\\Installer\\ResourceInstaller` interface.
+:class:`Puli\\AssetPlugin\\Api\\Installer\\ResourceInstaller` interface.
 With ``puli installer add``, the installer can be added to your Puli project:
 
 .. code-block:: text
@@ -268,7 +281,7 @@ with a star ``*`` in the output of ``puli target``:
       prod    copy    /var/www/prod/static    /%s
 
 All resources are installed in the default target by default (unless you
-passed a specific target to ``puli web add``, as you will learn in the next
+passed a specific target to ``puli asset map``, as you will learn in the next
 section). When you move your application to the staging server, you can change
 the default target before installing your resources:
 
@@ -276,16 +289,16 @@ the default target before installing your resources:
 
     $ puli target set-default staging
 
-When you run ``puli web install``, your resources will be installed in the
+When you run ``puli asset install``, your assets will be installed in the
 staging target now.
 
 Parallel Install Targets
 ------------------------
 
 In the previous section, we created multiple install targets, but only used
-one at a time. You can also assign your resources to different install targets
+one at a time. You can also assign your assets to different install targets
 at the same time. This is useful, for example, if you want to serve some
-resources from your own server and others from a CDN:
+assets from your own server and others from a CDN:
 
 .. code-block:: text
 
@@ -294,25 +307,25 @@ resources from your own server and others from a CDN:
     >     --installer rsync \
     >     --url-format http://cdn.example.com/%s
 
-When you map your web resources, select their target with the ``--target``
-option of the ``puli web add`` command:
+When you map your web assets, select their target with the ``--target`` option
+of the ``puli asset map`` command:
 
 .. code-block:: text
 
-    $ puli web add /app/public/{css,js} / --target local
-    $ puli web add /app/public/images /images --target cdn
+    $ puli asset map /app/public/{css,js} / --target local
+    $ puli asset map /app/public/images /images --target cdn
 
-When you run ``puli web install``, Puli will install the resources in the
+When you run ``puli asset install``, Puli will install the assets in the
 configured targets:
 
 .. code-block:: text
 
-    $ puli web install
+    $ puli asset install
     Installing /app/public/css into public_html/css via symlink...
     Installing /app/public/js into public_html/js via symlink...
     Installing /app/public/images into ssh://cdn.example.com/images via rsync...
 
-Since you specified a custom URL format for the cdn target, Puli will also
+Since you specified a custom URL format for the "cdn" target, Puli will also
 generate the correct resource URLs:
 
 .. code-block:: php
@@ -323,6 +336,6 @@ generate the correct resource URLs:
     // http://cdn.example.com/images/header.png
     $urlGenerator->generateUrl('/app/public/images/header.png');
 
-.. _`Web Resource Plugin`: https://github.com/puli/web-resource-plugin
+.. _Asset Plugin: https://github.com/puli/web-resource-plugin
 .. _Composer: https://getcomposer.org
 .. _Puli's Twig Extension: https://github.com/puli/twig-extension
