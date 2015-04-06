@@ -52,9 +52,9 @@ Puli's language. Puli supports virtually any kind of install target, such as:
 
 Install targets store three pieces of information:
 
-* their location (a directory path, a URL, …)
-* the used installer (symlink, copy, ftp, rsync, …)
-` their URL format
+* their location (a directory path, a URL, ...)
+* the used installer (symlink, copy, ftp, rsync, ...)
+* their URL format
 
 The URL format is used to generate URLs for the resources installed in the
 target. The default format is ``/%s``, but you could set it to more elaborate
