@@ -63,8 +63,7 @@ Web Assets
 
 Some resources - such as templates or configuration files - are needed by the
 web server only. Others - like CSS files and images - need to be placed in
-a public directory, where browsers can download them. We'll call these resources
-*web assets*.
+a public directory, where browsers can download them.
 
 `Puli's Asset Plugin`_ provides a generic solution for this problem.
 With that plugin, you can map resources to paths in so-called *install targets*
@@ -93,7 +92,7 @@ resources. The following example uses `Puli's Twig Extension`_:
 
     <img src="{{ asset_url('/acme/blog/images/header.png') }}" />
 
-Read :doc:`web-resources` if you want to learn more.
+Read :doc:`web-assets` if you want to learn more.
 
 Stream Wrappers
 ---------------
