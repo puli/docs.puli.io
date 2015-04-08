@@ -81,13 +81,13 @@ check whether the CLI was installed successfully:
     If "vendor-dir" or "bin-dir" is set in composer.json, the path to the
     ``puli`` command will be different.
 
-Optional: Add Shortcut to Puli
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Recommended: Add Shortcut to Puli
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To save you from typing ``vendor/bin/puli`` all the time, add the ``vendor/bin``
 directory to your path:
 
-* On Unix-based systems, add the following line to ~/.bashrc:
+* On Unix-based systems, add the following line to ``~/.bashrc``:
 
     .. code-block:: bash
 
@@ -110,6 +110,34 @@ directory to your path:
     of the path accordingly.
 
 Now you should be able to run ``puli`` without the ``vendor/bin/`` prefix.
+
+Recommended: Disable Glob Expansion
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+By default, shells like Bash expand glob arguments before passing them to the
+called command. Look at this short example for a demonstration:
+
+.. code-block:: bash
+
+    # What you type
+    $ command *.js
+
+    # What the command receives by the shell
+    $ command script1.js script2.js ...
+
+For Puli, glob expansion should be disabled. On Unix-based systems, add the
+following lines to ``~/.bashrc``:
+
+.. code-block:: bash
+
+    # Disable glob expansion for Puli
+    alias puli='set -f;puli';puli(){ command puli "$@";set +f;}
+
+Apply the changes with the ``source`` command:
+
+.. code-block:: text
+
+    $ source ~/.bashrc
 
 Loading the Puli Factory
 ------------------------
