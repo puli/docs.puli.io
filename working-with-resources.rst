@@ -23,7 +23,7 @@ the path of a resource and returns a :class:`Puli\\Repository\\Api\\Resource\\Re
 If you want to retrieve multiple resources at once, use
 :method:`Puli\\Repository\\Api\\ResourceRepository::find`. This method accepts a
 glob pattern and returns a
-:class:`Puli\\Repository\\Resource\\Api\\ResourceCollection`:
+:class:`Puli\\Repository\\Api\\ResourceCollection`:
 
 .. code-block:: php
 
@@ -65,9 +65,9 @@ provides access to the name and the repository path of the resource:
     // => /css/style.css
 
 Resources don't necessarily have to be located on the filesystem. But those
-that do implement :class:`Puli\\Repository\\Resource\\Api\\Resource\\FilesystemResource`,
+that do implement :class:`Puli\\Repository\\Api\\Resource\\FilesystemResource`,
 which lets you access the filesystem path with
-:method:`Puli\\Repository\\Resource\\Api\\Resource\\FilesystemResource::getFilesystemPath`:
+:method:`Puli\\Repository\\Api\\Resource\\FilesystemResource::getFilesystemPath`:
 
 .. code-block:: php
 
@@ -77,9 +77,9 @@ which lets you access the filesystem path with
     // => /path/to/res/assets/css/style.css
 
 Resources that have a body - such as files - implement
-:class:`Puli\\Repository\\Resource\\Api\\Resource\\BodyResource`. This interface
+:class:`Puli\\Repository\\Api\\Resource\\BodyResource`. This interface
 lets you access the body with
-:method:`Puli\\Repository\\Resource\\Api\\Resource\\BodyResource::getBody`:
+:method:`Puli\\Repository\\Api\\Resource\\BodyResource::getBody`:
 
 .. code-block:: php
 
@@ -133,7 +133,7 @@ Resource Collections
 --------------------
 
 When you fetch multiple resources from the repository, they are returned
-within a :class:`Puli\\Repository\\Resource\\Api\\ResourceCollection`
+within a :class:`Puli\\Repository\\Api\\ResourceCollection`
 instance. Resource collections offer convenience methods for accessing the names
 and the paths of all contained resources at once:
 
@@ -157,7 +157,7 @@ and the paths of all contained resources at once:
 
 Resource collections are traversable, countable and support
 :phpclass:`ArrayAccess`. When you still need the collection as array, call
-:method:`Puli\\Repository\\Resource\\Api\\ResourceCollection::toArray`:
+:method:`Puli\\Repository\\Api\\ResourceCollection::toArray`:
 
 .. code-block:: php
 
