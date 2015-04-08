@@ -111,11 +111,11 @@ directory to your path:
 
 Now you should be able to run ``puli`` without the ``vendor/bin/`` prefix.
 
-Recommended: Disable Glob Expansion
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Recommended: Disable Glob Expansion (Unix only)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-By default, shells like Bash expand glob arguments before passing them to the
-called command. Look at this short example for a demonstration:
+By default, Unix shells like Bash expand glob arguments before passing them to
+the called command. Look at this short example for a demonstration:
 
 .. code-block:: bash
 
@@ -125,8 +125,8 @@ called command. Look at this short example for a demonstration:
     # What the command receives by the shell
     $ command script1.js script2.js ...
 
-For Puli, glob expansion should be disabled. On Unix-based systems, add the
-following lines to ``~/.bashrc``:
+If you use Puli on a Unix system, you should disable glob expansion for the
+``puli`` command. If you use Bash, add the following lines to ``~/.bashrc``:
 
 .. code-block:: bash
 
@@ -138,6 +138,9 @@ Apply the changes with the ``source`` command:
 .. code-block:: text
 
     $ source ~/.bashrc
+
+If you use a different shell than Bash, see `this answer on StackOverflow`_ for
+instructions.
 
 Loading the Puli Factory
 ------------------------
@@ -248,3 +251,4 @@ Further Reading
 .. _Discovery: https://github.com/puli/discovery
 .. _Factory: https://github.com/puli/factory
 .. _CLI: https://github.com/puli/cli
+.. _this answer on StackOverflow: http://stackoverflow.com/questions/11456403/stop-shell-wildcard-character-expansion/22945024#22945024
