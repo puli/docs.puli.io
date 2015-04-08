@@ -140,7 +140,7 @@ You can also pass a path relative to the Puli path of your template:
     <img src="{{ asset_url('../images/header.png') }}" />
 
 If you want to generate resource URLs in your own libraries, use the
-:class:`Puli\\AssetPlugin\\Api\\UrlGenerator\\ResourceUrlGenerator` that
+:class:`Puli\\AssetPlugin\\Api\\UrlGenerator\\AssetUrlGenerator` that
 is returned by the Puli factory:
 
 .. code-block:: php
