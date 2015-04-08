@@ -79,7 +79,7 @@ target:
 .. code-block:: text
 
     $ puli asset map /app/public /
-    $ puli asset map "/acme/blog/{css,js}" /blog
+    $ puli asset map /acme/blog/{css,js} /blog
 
 The ``puli asset map`` command takes two parameters:
 
