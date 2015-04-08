@@ -10,11 +10,12 @@ If you don't know what Puli is or why you should use it, read
 Mapping Resources
 -----------------
 
-Puli paths can be mapped to files or directories with the ``puli map`` command:
+Puli paths can be mapped to files or directories with the ``puli path map``
+command:
 
 .. code-block:: text
 
-    $ puli map /acme/blog res
+    $ puli path map /acme/blog res
 
 The first argument is a Puli path, followed by one or more paths in your
 project. By convention, Puli paths should contain your vendor and package name
@@ -39,24 +40,24 @@ you need to cherry-pick files from specific locations:
 
 .. code-block:: text
 
-    $ puli map /acme/blog/css/reset.css shared/reset.css
+    $ puli path map /acme/blog/css/reset.css shared/reset.css
 
 Listing Mappings
 ----------------
 
-The current mappings can be displayed by typing ``puli map`` without arguments:
+The current mappings can be displayed by typing ``puli path``:
 
 .. code-block:: text
 
-    $ puli map
+    $ puli path
     /acme/blog res
 
 This command just displays the mappings in your project. If you want to list
-all mappings in all installed packages, type ``puli map -a``:
+all mappings in all installed packages, type ``puli path -a``:
 
 .. code-block:: text
 
-    $ puli map -a
+    $ puli path -a
     acme/blog
     /acme/blog res
 
@@ -123,8 +124,8 @@ You can add a path to a mapping by prefixing that path with "+":
 
 .. code-block:: text
 
-    $ puli map /acme/blog +assets
-    $ puli map
+    $ puli path map /acme/blog +assets
+    $ puli path
     /acme/blog res, assets
 
 When a mapping contains multiple files or directories, later mappings *override*
@@ -136,23 +137,28 @@ all existing mapped paths:
 
 .. code-block:: text
 
-    $ puli map /acme/blog res assets
-    $ puli map
+    $ puli path /acme/blog res assets
+    $ puli path
     /acme/blog res, assets
 
 Remove a path from the mapping by prefixing that path with "-":
 
 .. code-block:: text
 
-    $ puli map /acme/blog -assets
-    $ puli map
+    $ puli path /acme/blog -- -assets
+    $ puli path
     /acme/blog res
 
-Mappings can be removed completely with ``puli map -d``:
+.. note::
+
+    The separator ``--`` is needed so that ``-assets`` is not interpreted as a
+    console option.
+
+Mappings can be removed completely with ``puli path remove``:
 
 .. code-block:: text
 
-    $ puli map -d /acme/blog
+    $ puli path remove /acme/blog
 
 Referencing Other Packages
 --------------------------
@@ -165,7 +171,7 @@ Use the prefix ``@package-name:`` to reference the install path of that package:
 
 .. code-block:: text
 
-    $ puli map /acme/theme @acme/theme:res
+    $ puli path map /acme/theme @acme/theme:res
 
 The example above maps the Puli path ``/acme/theme`` to the ``res`` directory in
 the "acme/theme" package.

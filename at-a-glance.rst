@@ -32,8 +32,8 @@ Every package developer is responsible for mapping their resources with the
 
 .. code-block:: text
 
-    # Map the prefix "/acme/blog" to the "res" directory
-    $ puli map /acme/blog res
+    # Map the Puli path "/acme/blog" to the "res" directory
+    $ puli path map /acme/blog res
 
 The configuration is stored in a ``puli.json`` file that is distributed with the
 package - just like ``composer.json``. Puli reads the ``puli.json`` files of all
@@ -50,7 +50,7 @@ simply copy the files to your project and override the path mappings:
 
 .. code-block:: text
 
-    $ puli map /acme/blog/views/footer.html res/views/footer.html
+    $ puli path map /acme/blog/views/footer.html res/views/footer.html
 
 
 The file ``res/views/footer.html`` stored in your project will now be used
@@ -123,7 +123,7 @@ binding type:
 
 .. code-block:: text
 
-    $ puli bind /acme/blog/config/doctrine/*.xml doctrine/xml-mapping
+    $ puli binding add /acme/blog/config/doctrine/*.xml doctrine/xml-mapping
 
 With Puli's :class:`Puli\\Discovery\\Api\\ResourceDiscovery`, Doctrine is able
 to load these files:

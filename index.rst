@@ -20,7 +20,7 @@ of your project in a filesystem-like repository. With the Puli CLI, you map
 
 .. code-block:: text
 
-    $ puli map app res
+    $ puli path map /app res
 
 Files in these paths can then be easily accessed in your PHP code:
 

@@ -62,7 +62,7 @@ Any package that contains Doctrine mappings *binds* these mappings to the type:
 .. code-block:: text
 
     # acme/blog developer
-    $ puli bind /acme/blog/config/doctrine/*.xml doctrine/xml-mapping
+    $ puli binding add /acme/blog/config/doctrine/*.xml doctrine/xml-mapping
 
 Doctrine then fetches all resources bound to the type from Puli's
 :class:`Puli\\Discovery\\Api\\ResourceDiscovery` and processes them:
@@ -119,7 +119,7 @@ for the parameters:
 .. code-block:: text
 
     # acme/blog developer
-    $ puli bind /acme/blog/config/doctrine/*.xml doctrine/xml-mapping \
+    $ puli binding add /acme/blog/config/doctrine/*.xml doctrine/xml-mapping \
         --param namespace="Acme\Blog\Entity\" \
         --param alias="blog:"
 
@@ -167,7 +167,7 @@ The description is displayed when listing the installed types with ``puli type``
         doctrine/xml-mapping An XML mapping loaded by the Doctrine ORM
                              (namespace=null, alias=null)
 
-    Use "puli bind <resource> <type>" to bind a resource to a type.
+    Use "puli binding add <resource> <type>" to bind a resource to a type.
 
 Enabled and Disabled Bindings
 -----------------------------
@@ -175,19 +175,19 @@ Enabled and Disabled Bindings
 When you install packages that bind resources to a binding type, these bindings
 are not automatically enabled. Consider that you, the "acme/blog" developer,
 install the package "awesome/comment" which contains Doctrine mappings for a
-``Comment`` entity. These bindings are displayed by the command ``puli bind``:
+``Comment`` entity. These bindings are displayed by the command ``puli binding``:
 
 .. code-block:: text
 
     # acme/blog developer
-    $ puli bind
+    $ puli binding
     Enabled bindings:
 
         acme/blog
         1fb5b8 /acme/blog/config/doctrine/*.xml doctrine/xml-mapping
 
     Bindings that are neither enabled nor disabled:
-     (use "puli bind --enable <uuid>" to enable)
+     (use "puli binding enable <uuid>" to enable)
 
         awesome/comment
         8fb9c8 /awesome/comment/config/doctrine/*.xml doctrine/xml-mapping
@@ -200,8 +200,8 @@ Let's enable the binding now:
 .. code-block:: text
 
     # acme/blog developer
-    $ puli bind --enable 8fb9c8
-    $ puli bind
+    $ puli binding enable 8fb9c8
+    $ puli binding
     Enabled bindings:
 
         acme/blog
