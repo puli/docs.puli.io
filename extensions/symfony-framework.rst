@@ -76,7 +76,7 @@ Now, enable the bundle by modifying ``AppKernel``:
         {
             $bundles = array(
                 // ...,
-                new Puli\Extension\Symfony\PuliBundle\PuliBundle(),
+                new Puli\SymfonyBundle\PuliBundle(),
             );
 
             // ...

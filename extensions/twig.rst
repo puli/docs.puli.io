@@ -40,16 +40,16 @@ Configuration
 -------------
 
 In order to activate the extension, create a new
-:class:`Puli\\Extension\\Twig\\PuliTemplateLoader` and register it with Twig.
+:class:`Puli\\TwigExtension\\PuliTemplateLoader` and register it with Twig.
 The loader turns a Puli path into an absolute path when loading a template.
-Then, create a new :class:`Puli\\Extension\\Twig\\PuliExtension` and add it to
+Then, create a new :class:`Puli\\TwigExtension\\PuliExtension` and add it to
 Twig. The extension takes care that templates loaded by the
-:class:`Puli\\Extension\\Twig\\PuliTemplateLoader` are processed correctly.
+:class:`Puli\\TwigExtension\\PuliTemplateLoader` are processed correctly.
 
 .. code-block:: php
 
-    use Puli\Extension\Twig\PuliTemplateLoader;
-    use Puli\Extension\Twig\PuliExtension;
+    use Puli\TwigExtension\PuliTemplateLoader;
+    use Puli\TwigExtension\PuliExtension;
 
     $twig = new \Twig_Environment(new PuliTemplateLoader($repo));
     $twig->addExtension(new PuliExtension($repo));

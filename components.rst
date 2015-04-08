@@ -67,7 +67,7 @@ the discovery:
 .. code-block:: php
 
     use Puli\Manager\ManagerFactory;
-    use Puli\Manager\Repository\ResourceMapping;
+    use Puli\Manager\Repository\PathMapping;
 
     // Start the service container
     $puli = new Puli(getcwd());
@@ -75,7 +75,7 @@ the discovery:
 
     $manager = $puli->getRepositoryManager();
 
-    $manager->addResourceMapping(new ResourceMapping('/app', 'res'));
+    $manager->addPathMapping(new PathMapping('/app', 'res'));
 
 The Manager component stores all configuration in a ``puli.json`` file in
 the root directory of the project. This configuration can be used to rebuild the

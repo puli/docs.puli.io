@@ -43,12 +43,12 @@ Configuration
 -------------
 
 To locate configuration files with Puli, create a new
-:class:`Puli\\Extension\\Symfony\\Config\\PuliFileLocator` and pass it to your
+:class:`Puli\\SymfonyBridge\\Config\\PuliFileLocator` and pass it to your
 file loaders:
 
 .. code-block:: php
 
-    use Puli\Extension\Symfony\Config\PuliFileLocator;
+    use Puli\SymfonyBridge\Config\PuliFileLocator;
     use Symfony\Component\Routing\Loader\YamlFileLoader;
 
     $loader = new YamlFileLoader(new PuliFileLocator($repo));
@@ -57,22 +57,22 @@ file loaders:
     $routes = $loader->load('/acme/blog/config/routing.yml');
 
 You need to pass Puli's resource repository to the constructor of the
-:class:`Puli\\Extension\\Symfony\\Config\\PuliFileLocator`. If you don't know
+:class:`Puli\\SymfonyBridge\\Config\\PuliFileLocator`. If you don't know
 how to create that, read the :doc:`../getting-started` guide.
 
 Chained Locators
 ----------------
 
 If you want to use the
-:class:`Puli\\Extension\\Symfony\\Config\\PuliFileLocator` and Symfony's
+:class:`Puli\\SymfonyBridge\\Config\\PuliFileLocator` and Symfony's
 conventional ``FileLocator`` side by side, you can use them both by wrapping
-them into a :class:`Puli\\Extension\\Symfony\\Config\\FileLocatorChain`:
+them into a :class:`Puli\\SymfonyBridge\\Config\\FileLocatorChain`:
 
 .. code-block:: php
 
-    use Puli\Extension\Symfony\Config\PuliFileLocator;
-    use Puli\Extension\Symfony\Config\FileLocatorChain;
-    use Puli\Extension\Symfony\Config\ChainableFileLocator;
+    use Puli\SymfonyBridge\Config\PuliFileLocator;
+    use Puli\SymfonyBridge\Config\FileLocatorChain;
+    use Puli\SymfonyBridge\Config\ChainableFileLocator;
     use Symfony\Component\Routing\Loader\YamlFileLoader;
 
     $locatorChain = new FileLocatorChain(array(
@@ -86,22 +86,22 @@ them into a :class:`Puli\\Extension\\Symfony\\Config\\FileLocatorChain`:
     // Loads the file from __DIR__/config/routing.yml
     $routes = $loader->load('config/routing.yml');
 
-:class:`Puli\\Extension\\Symfony\\Config\\ChainableFileLocator` is a simple
+:class:`Puli\\SymfonyBridge\\Config\\ChainableFileLocator` is a simple
 extension of Symfony's ``FileLocator`` that supports the interface required by
 the locator chain. Note that this locator must come **after** the
-:class:`Puli\\Extension\\Symfony\\Config\\PuliFileLocator` in the chain.
+:class:`Puli\\SymfonyBridge\\Config\\PuliFileLocator` in the chain.
 
 Puli also provides a chainable version of the file locator bundled with the
 `Symfony HttpKernel component`_: Use the
-:class:`Puli\\Extension\\Symfony\\HttpKernel\\ChainableKernelFileLocator`
+:class:`Puli\\SymfonyBridge\\HttpKernel\\ChainableKernelFileLocator`
 if you want to load configuration files from Symfony bundles:
 
 .. code-block:: php
 
-    use Puli\Extension\Symfony\Config\PuliFileLocator;
-    use Puli\Extension\Symfony\Config\FileLocatorChain;
-    use Puli\Extension\Symfony\Config\ChainableFileLocator;
-    use Puli\Extension\Symfony\HttpKernel\ChainableKernelFileLocator;
+    use Puli\SymfonyBridge\Config\PuliFileLocator;
+    use Puli\SymfonyBridge\Config\FileLocatorChain;
+    use Puli\SymfonyBridge\Config\ChainableFileLocator;
+    use Puli\SymfonyBridge\HttpKernel\ChainableKernelFileLocator;
 
     $locatorChain = new FileLocatorChain(array(
         new PuliFileLocator($repo),
@@ -115,7 +115,7 @@ if you want to load configuration files from Symfony bundles:
     $routes = $loader->load('@AcmeBlogBundle/Resources/config/routing.yml');
 
 Take care again that the
-:class:`Puli\\Extension\\Symfony\\HttpKernel\\ChainableKernelFileLocator`
+:class:`Puli\\SymfonyBridge\\HttpKernel\\ChainableKernelFileLocator`
 comes last in the chain.
 
 Limitations
@@ -158,7 +158,7 @@ What happens if we override this file in the Puli repository?
     //  - /path/to/blog/config/routing.yml
 
 This is a limitation in Symfony and cannot be worked around. For this
-reason, :class:`Puli\\Extension\\Symfony\\Config\\PuliFileLocator` does not
+reason, :class:`Puli\\SymfonyBridge\\Config\\PuliFileLocator` does not
 support relative file paths.
 
 .. _Puli: https://github.com/puli/puli
