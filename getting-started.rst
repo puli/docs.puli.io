@@ -147,7 +147,7 @@ Loading the Puli Services
 
 When working with Puli, you mainly need three services:
 
-* The :class:`Puli\\Factory\\PuliFactory` for Puli's services;
+* The :class:`Puli\\Factory\\PuliFactory` for creating Puli's services;
 * The :class:`Puli\\Repository\\Api\\ResourceRepository` for accessing Puli
   resources;
 * The :class:`Puli\\Discovery\\Api\\ResourceDiscovery` for finding Puli
@@ -169,8 +169,8 @@ CLI.
 
 For performance reasons, the Puli services should be created only once per
 application. Instead of storing them in global variables, it is usually nicer
-to use a Dependency Injection Container for creating the services. A simple
-Dependency Injection Container for small projects is Pimple_.
+to use a Dependency Injection Container for creating the services on demand.
+A simple Dependency Injection Container for small projects is Pimple_.
 
 .. note::
 
