@@ -271,7 +271,15 @@ Now we can map the ``/app/public`` directory to the root of that install target:
     $ puli asset map /app/public /
 
 The command ``puli asset install`` will install all assets under the
-``/app/public`` directory in the ``public_html`` directory.
+``/app/public`` directory in ``public_html``:
+
+.. code-block:: text
+
+    $ puli asset install
+    Installing /app/public into public_html via symlink...
+
+The file ``http://localhost/css/style.css`` can now be accessed in the browser,
+as long as ``localhost`` points to our ``public_html`` directory.
 
 Read :doc:`web-assets` to learn more about web asset management.
 
