@@ -172,7 +172,7 @@ Let's run ``puli asset`` again to get a better understanding:
             54b31b /app/public         /
             d7c042 /acme/blog/{css,js} /blog
 
-    Use "puli web install" to install the assets in their targets.
+    Use "puli asset install" to install the assets in their targets.
 
 Since ``/app/public`` is mapped to the root of the install target, Puli
 generates the URL ``/images/header.png`` for the resource
