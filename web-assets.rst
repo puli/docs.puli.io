@@ -22,18 +22,6 @@ You can install the plugin with Composer_:
 
     $ composer require puli/asset-plugin:~1.0
 
-.. note::
-
-    Make sure that the "minimum-stability" setting is set to "dev" in
-    composer.json, otherwise the installation will fail:
-
-    .. code-block:: json
-
-        {
-            ...,
-            "minimum-stability": "dev"
-        }
-
 Before the plugin can be used, it needs to be enabled with the Puli CLI:
 
 .. code-block:: text
