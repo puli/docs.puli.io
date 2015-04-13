@@ -25,10 +25,10 @@ release dates:
 =================  =====================================  ============= ===================
 Component          Description                            Version       Stable Release
 =================  =====================================  ============= ===================
-Repository_        The PHP resource repository API        1.0.0-beta    April 2015
-Discovery_         The PHP resource discovery API         1.0.0-beta    April 2015
+Repository_        The PHP resource repository API        1.0.0-beta4   April 2015
+Discovery_         The PHP resource discovery API         1.0.0-beta4   April 2015
 Factory_           The factory API for Puli's services    1.0.0-beta    April 2015
-CLI_               The Command-Line Interface             1.0.0-beta    April 2015
+CLI_               The Command-Line Interface             1.0.0-beta4   April 2015
 =================  =====================================  ============= ===================
 
 Installation
