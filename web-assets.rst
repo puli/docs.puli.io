@@ -174,7 +174,7 @@ option when creating the target with ``puli target add``:
 
 .. code-block:: text
 
-    $ puli target add local public_html --url-format http://example.com/%s
+    $ puli target update local --url-format http://example.com/%s
 
 Now Puli generates the URL ``http://example.com/images/header.png`` for the
 header image.
@@ -187,7 +187,7 @@ need to adjust the URL format correspondingly:
 
 .. code-block:: text
 
-    $ puli target add local public_html/assets --url-format /assets/%s
+    $ puli target update local --location public_html/assets --url-format /assets/%s
 
 We told Puli to publish the assets of the target in the ``assets``
 sub-directory. Likewise, we had to adjust the URL format to ``/assets/%s``, so
@@ -201,7 +201,7 @@ query string ``?v1`` to the URLs of all resources in our target:
 
 .. code-block:: text
 
-    $ puli target add local public_html --url-format /%s?v1
+    $ puli target update local --url-format /%s?v1
 
 If you release a new version of your application, you only have to update the
 URL format to force all browsers to reload your assets instead of using the
@@ -209,7 +209,7 @@ cached version:
 
 .. code-block:: text
 
-    $ puli target add local public_html --url-format /%s?v2
+    $ puli target update local --url-format /%s?v2
 
 Installers
 ----------
@@ -223,13 +223,14 @@ symlink (default) Creates asset symlinks in a target directory
 copy              Copies assets to a target directory
 ================= ==============================================
 
-You can select the used installer when creating the install target:
+You can select the used installer when creating or updating the install target:
 
 .. code-block:: text
 
-    $ puli target add local public_html --installer copy
+    $ puli target update local --installer copy
 
 In future versions of Puli, more installers (ftp, rsync, ...) will be added.
+
 You can also create a custom installer by implementing the
 :class:`Puli\\AssetPlugin\\Api\\Installer\\ResourceInstaller` interface.
 With ``puli installer add``, the installer can be added to your Puli project:
@@ -243,7 +244,7 @@ Now you can use the installer in your install target:
 
 .. code-block:: text
 
-    $ puli target add local public_html --installer rsync
+    $ puli target update local --installer rsync
 
 Switching the Install Target
 ----------------------------
