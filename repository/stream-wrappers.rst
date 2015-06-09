@@ -1,15 +1,7 @@
-Stream Wrapper
-==============
+Stream Wrappers
+===============
 
-This guide explains how to use Puli paths with PHP's file functions.
-
-If you don't know what Puli is or why you should use it, read :doc:`at-a-glance`
-first.
-
-Registering a Scheme
---------------------
-
-Puli supports a `stream wrapper`_ that lets you access the contents of the
+Puli supports a `stream wrapper`_ that lets you access the |resources| in the
 repository transparently through PHP's file functions. To register the wrapper,
 call the :method:`Puli\\Repository\\StreamWrapper\\ResourceStreamWrapper::register`
 method and pass the name of a URI schema and a
@@ -21,9 +13,8 @@ method and pass the name of a URI schema and a
 
     ResourceStreamWrapper::register('puli', $repo);
 
-After registering the stream wrapper, you can use regular PHP functions to
-access the files and directories in the repository, as long as you prefix them
-with the registered URI scheme:
+After registering the stream wrapper, you can pass |Puli paths| to regular PHP
+functions, prefixed by the registered URI scheme:
 
 .. code-block:: php
 
@@ -36,12 +27,14 @@ with the registered URI scheme:
 Performance Tweaks
 ------------------
 
-Unfortunately, the stream wrapper cannot be loaded on demand. The method
+The method
 :method:`Puli\\Repository\\StreamWrapper\\ResourceStreamWrapper::register` needs
-to be called in every request even if the stream wrapper is not used.
-
-To mitigate the performance impact of the registration, you can pass a callable
-that loads the repository on demand:
+to be called in every request even if the stream wrapper is not used. This means
+that also the repository needs to be loaded in every request, which can have
+a negative performance impact on your application. To mitigate this performance
+impact, you can pass a callable to
+:method:`Puli\\Repository\\StreamWrapper\\ResourceStreamWrapper::register` that
+loads the repository on demand:
 
 .. code-block:: php
 
@@ -65,5 +58,7 @@ that loads the repository on demand:
 
     ResourceStreamWrapper::register('puli', array($registry, 'getRepository'));
 
-.. _Puli: https://github.com/puli/puli
 .. _stream wrapper: http://php.net/manual/en/intro.stream.php
+
+.. |resources| replace:: :ref:`resources <glossary-resource>`
+.. |Puli paths| replace:: :ref:`Puli paths <glossary-puli-path>`

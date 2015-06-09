@@ -1,10 +1,10 @@
-Using Puli with the Symfony Framework
-=====================================
+The Puli Bundle for Symfony Projects
+====================================
 
 There are two ways of using Puli with the `Symfony framework`_:
 
 * New projects can be started based on the `Symfony Puli Edition`_.
-* Existing projects can be extended with the `Puli bundle`_.
+* Existing projects can be extended with the `Puli Bundle`_.
 
 Both ways are described in detail below.
 
@@ -33,7 +33,7 @@ Installing the Puli Bundle
 --------------------------
 
 If you cannot or don't want to start off the Symfony Puli Edition, you need to
-install the Puli bundle with `Composer`_. `Install Composer`_ and enter the
+install the Puli Bundle with `Composer`_. `Install Composer`_ and enter the
 following command in a terminal:
 
 .. code-block:: text
@@ -107,7 +107,7 @@ directories of a Puli path correspond to the name of a Composer package. In this
 example, the file ``config/routing/wdt.xml`` is loaded from the ``Resources``
 directory in the package "symfony/web-profiler".
 
-Read :doc:`symfony-config` if you want to learn more about using Puli with
+Read :doc:`symfony-bridge` if you want to learn more about using Puli with
 Symfony configuration files.
 
 Twig Templates
@@ -165,7 +165,7 @@ Read :doc:`twig` to learn more about the Puli extension for Twig.
 
 .. _Symfony framework: http://symfony.com
 .. _Symfony Puli Edition: https://github.com/puli/symfony-puli-edition
-.. _Puli bundle: https://github.com/puli/symfony-bundle
+.. _Puli Bundle: https://github.com/puli/symfony-bundle
 .. _Puli CLI: https://github.com/puli/cli
 .. _Puli Composer Plugin: https://github.com/puli/composer-plugin
 .. _Installing and Configuring Symfony: http://symfony.com/doc/current/book/installation.html

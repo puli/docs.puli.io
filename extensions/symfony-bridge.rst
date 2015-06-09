@@ -1,9 +1,10 @@
-Locating Config Files with Puli
-===============================
+The Puli Bridge for Symfony
+===========================
 
-Puli provides a file locator for the `Symfony Config component`_ that locates
-configuration files using a Puli repository. With this locator, you can
-refer from one configuration file to another via its Puli path:
+Puli supports a `bridge`_ for the `Symfony`_ components. The bridge provides a
+file locator for the `Symfony Config component`_ that locates
+configuration files through a Puli repository. With this locator, you can
+refer from one configuration file to another by its |Puli path|:
 
 .. code-block:: yaml
 
@@ -14,11 +15,17 @@ refer from one configuration file to another via its Puli path:
 Installation
 ------------
 
-The `Puli bridge`_ can be installed with Composer_:
+.. important::
+
+    Before you continue, :ref:`install the Puli CLI <cli-installation>` and
+    :doc:`the Repository Component <../repository/getting-started>` in your
+    project.
+
+Install the Puli Bridge with Composer:
 
 .. code-block:: text
 
-    $ composer require puli/symfony-bridge:~1.0
+    $ composer require puli/symfony-bridge:^1.0
 
 Configuration
 -------------
@@ -34,12 +41,11 @@ file loaders:
 
     $loader = new YamlFileLoader(new PuliFileLocator($repo));
 
-    // Locates the file from Puli's repository
+    // Locates the file through Puli's repository
     $routes = $loader->load('/acme/blog/config/routing.yml');
 
-You need to pass Puli's resource repository to the constructor of the
-:class:`Puli\\SymfonyBridge\\Config\\PuliFileLocator`. If you don't know
-how to create that, read the :doc:`../getting-started` guide.
+The :class:`Puli\\SymfonyBridge\\Config\\PuliFileLocator` receives Puli's
+:class:`Puli\\Repository\\Api\\ResourceRepository` as only argument.
 
 Chained Locators
 ----------------
@@ -142,9 +148,9 @@ This is a limitation in Symfony and cannot be worked around. For this
 reason, :class:`Puli\\SymfonyBridge\\Config\\PuliFileLocator` does not
 support relative file paths.
 
-.. _Puli: https://github.com/puli/puli
-.. _Puli bridge: https://github.com/puli/symfony-bridge
-.. _Composer: https://getcomposer.org
+.. _bridge: https://github.com/puli/symfony-bridge
 .. _Symfony: http://symfony.com
 .. _Symfony Config component: http://symfony.com/doc/current/components/config/introduction.html
 .. _Symfony HttpKernel component: http://symfony.com/doc/current/components/http_kernel/introduction.html
+
+.. |Puli path| replace:: :ref:`Puli path <glossary-puli-path>`

@@ -1,24 +1,17 @@
 Working with Resources
 ======================
 
-This guide explains how to use the resources returned by the Puli repository.
-If you do not have a working repository, read :doc:`getting-started`.
-
-If you don't know what Puli is or why you should use it, read :doc:`at-a-glance`
-first.
-
-Accessing Resources
--------------------
-
-You can access individual resources in the repository with the method
-:method:`Puli\\Repository\\Api\\ResourceRepository::get`:
+You can retrieve |resources| from Puli's
+:class:`Puli\\Repository\\Api\\ResourceRepository` with the
+:method:`Puli\\Repository\\Api\\ResourceRepository::get` method:
 
 .. code-block:: php
 
     $resource = $repo->get('/css/style.css');
 
 The :method:`Puli\\Repository\\Api\\ResourceRepository::get` method accepts
-the path of a resource and returns a :class:`Puli\\Repository\\Api\\Resource\\Resource`.
+the |Puli path| of a resource and returns a
+:class:`Puli\\Repository\\Api\\Resource\\Resource`.
 
 If you want to retrieve multiple resources at once, use
 :method:`Puli\\Repository\\Api\\ResourceRepository::find`. This method accepts a
@@ -52,7 +45,7 @@ Resources
 
 The :method:`Puli\\Repository\\Api\\ResourceRepository::get` method returns
 :class:`Puli\\Repository\\Api\\Resource\\Resource` instances. This interface
-provides access to the name and the repository path of the resource:
+provides access to the name and the Puli path of the resource:
 
 .. code-block:: php
 
@@ -90,8 +83,9 @@ lets you access the body with
 Child Resources
 ---------------
 
-Resources support child resources. One prime example is a filesystem directory
-which may contain other directories and files.
+Resources support nested resources. In Puli, these are called *child resources*.
+One prime example is a filesystem directory which may contain other directories
+and files.
 
 You can access the children of a resource with the methods
 :method:`Puli\\Repository\\Api\\Resource\\Resource::getChild`,
@@ -116,7 +110,7 @@ Metadata
 Resources support the method
 :method:`Puli\\Repository\\Api\\Resource\\Resource::getMetadata` which returns
 a :class:`Puli\\Repository\\Api\\Resource\\ResourceMetadata` instance. This
-interface gives access to various metadata of a resource. For example, you can
+interface gives access to additional data about a resource. For example, you can
 use :method:`Puli\\Repository\\Api\\Resource\\ResourceMetadata::getModificationTime`
 to access the UNIX timestamp of the resource's last modification. This is useful
 for caching:
@@ -135,7 +129,7 @@ Resource Collections
 When you fetch multiple resources from the repository, they are returned
 within a :class:`Puli\\Repository\\Api\\ResourceCollection`
 instance. Resource collections offer convenience methods for accessing the names
-and the paths of all contained resources at once:
+and the Puli paths of all contained resources at once:
 
 .. code-block:: php
 
@@ -164,3 +158,6 @@ Resource collections are traversable, countable and support
     $array = $resources->toArray();
 
 .. _Puli: https://github.com/puli/puli
+
+.. |resources| replace:: :ref:`resources <glossary-resource>`
+.. |Puli path| replace:: :ref:`Puli path <glossary-puli-path>`
