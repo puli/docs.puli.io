@@ -10,14 +10,13 @@
 
     </div>
 
-Puli: Plug 'n Play Packages for Composer
-========================================
+Puli: Intelligent Packages for PHP
+==================================
 
 .. toctree::
    :hidden:
 
    Home <self>
-   features
    installation
    glossary
 
@@ -57,57 +56,151 @@ Puli: Plug 'n Play Packages for Composer
    Symfony Bundle <extensions/symfony-bundle>
    Twig Extension <extensions/twig>
 
-Puli_ (pronounced "poo-lee") is a PHP tool that enables you to create Plug 'n
-Play packages for Composer_. These packages are completely independent of any
-PHP framework. Use them with your favorite framework or without. The choice is
-yours.
+Puli_ (pronounced "poo-lee") is a PHP technology that makes Composer_ packages
+more intelligent. Puli aims to replace "bundles", "plugins", "modules" and
+similar specialized packages supported by different frameworks with one generic,
+framework independent solution.
 
-Resources?
-----------
-
-*Resources*, in Puli's language, are all files that are not PHP, such as XML,
-YAML, CSS, JavaScript, images and so on. What PHP's autoloader is to your PHP
-code, Puli is to any other file.
-
-How does it work?
+Composer Packages
 -----------------
 
-Puli puts a ``puli.json`` file into each Puli-enabled package. This file
-contains metadata about the resources of the package and can be edited through
-Puli's Command Line Interface (CLI). Your PHP code loads Puli resources through
-the Puli Components.
+From the perspective of an application developer, Composer provides two
+important features when dealing with packages:
 
-Features
---------
+.. topic:: Installation and Dependency Resolution
 
-.. topic:: Automatic Resource Discovery
+    Composer installs packages in different versions together with all their
+    dependencies by calling a simple console command:
 
-    With Puli, your installed Composer packages recognize each other
-    automatically. You no longer need to configure packages to find each other's
-    files. Puli does it for you.
+    .. code-block:: text
 
-.. topic:: Load Resources Anywhere
+        $ composer require batman/blog
 
-    Puli provides a framework-agnostic naming convention to access files in
-    Composer packages. With this convention, you can easily load files from any
-    installed package. Independent of your framework.
+.. topic:: Class Autoloading
 
-.. topic:: Publish Package Resources
+    Composer generates a PSR-4 autoloader that is able to load the PHP classes
+    of all installed packages. Once the autoloader is included in your code, any
+    PHP class is loaded automatically when it is used for the first time:
 
-    Puli publishes your package's public resources, such as CSS files or images,
-    to your web server and generates their URLs for you. Want to serve images
-    from a Content Delivery Network? You can do it.
+    .. code-block:: php
 
-.. topic:: Override Package Resources
+        require_once __DIR__.'/vendor/autoload.php';
 
-    With Puli, you can easily override files in other Composer packages. Want to
-    customize a HTML, CSS or a configuration file? With Puli, all you need is to
-    call a simple console command.
+        // loaded by Composer's autoloader
+        $post = new Batman\Blog\Post();
 
-:doc:`Read more about Puli's features » <features>`
+Puli Packages
+-------------
 
-Installation
-------------
+Puli adds several other features to Composer packages that are typically needed
+in a PHP application. Similar to Composer's ``composer.json`` file, Puli
+packages store a ``puli.json`` file that contains Puli's metadata about the
+package. Puli's Command Line Interface (CLI) is used to modify that metadata.
+
+.. topic:: Resource Loading
+
+    Puli provides a naming convention (so called *Puli paths*) to load non-PHP
+    files, such as YAML, XML, CSS, HTML, images and more from your installed
+    packages:
+
+    .. code-block:: php
+
+        // views/index.html.twig in the "batman/blog" package
+        echo $twig->render('/batman/blog/views/index.html.twig');
+
+    The path is resolved by reading *path mappings* from the ``puli.json`` files
+    of all installed Puli packages. Authors of these packages, such as the
+    author of the "batman/blog" package, map prefixes to actual directories with
+    the Puli CLI:
+
+    .. code-block:: text
+
+        $ php puli.phar map /batman/blog res
+
+.. topic:: Resource Overriding
+
+    Puli packages may override resources from other packages. For example, your
+    application or a specialized theme package may replace the ``style.css``
+    file provided by a generic package "batman/blog" by a custom version:
+
+    .. code-block:: text
+
+        $ php puli.phar map /batman/blog/css/style.css res/css/blog/style.css
+
+.. topic:: Resource Discovery
+
+    Puli packages may act as *resource consumers* and as *resource
+    providers*. For example, a translator package (the consumer) may request
+    translation files from other installed packages (the providers).
+
+    .. raw:: html
+
+        <p>
+
+    .. image:: images/discovery.png
+       :alt: Puli's resource discovery mechanism.
+       :align: center
+
+    .. raw:: html
+
+        </p>
+
+    Resource consumers, like our translator, give a name to the resources they
+    want to load, such as "thor/translations". This name is called a
+    *binding type*. Other packages (the *resource providers*) assign
+    their translation files to this type. This is called *binding*. In the end,
+    you as the user of both packages only need to pass Puli's
+    :class:`Puli\\Discovery\\Api\\ResourceDiscovery` to the ``Translator`` class:
+
+    .. code-block:: php
+
+        $translator = new Translator($discovery);
+
+    The translator then loads all bound translation files from the discovery
+    without any further configuration.
+
+.. topic:: Resource Publishing
+
+    Puli publishes CSS files, JavaScript files and images bundled in your
+    packages and generates their public URLs for you. You can pass Puli paths
+    to simple utility functions to generate URLs in your PHP or HTML code:
+
+    .. code-block:: jinja
+
+        <img src="{{ resource_url('/batman/blog/public/logo.png') }}" />
+
+    Puli paths can be marked public with the Puli CLI:
+
+    .. code-block:: text
+
+        $ php puli.phar publish /batman/blog/public localhost /blog/
+
+    Here, we published the ``/batman/blog/public`` directory to the sub-directory
+    ``/blog/`` of the server "localhost". That server must also be defined with
+    the Puli CLI:
+
+    .. code-block:: text
+
+        $ php puli.phar server --add localhost public_html
+
+    This command registers the server "localhost" with the directory
+    ``public_html`` used as document root. Now Puli has enough information to
+    generate your URLs:
+
+    .. code-block:: html
+
+        <img src="/blog/logo.png" />
+
+    If you want, you can Puli also to install your public resources on the
+    server:
+
+    .. code-block:: text
+
+        $ php puli.phar publish --install
+        Installing /batman/blog/public into public_html/blog via symlink...
+
+Getting Started
+---------------
 
 Read :doc:`installation` to get started with Puli.
 

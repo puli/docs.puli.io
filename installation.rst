@@ -95,14 +95,11 @@ Apply the changes with the ``source`` command:
 If you use a different shell than Bash, see `this answer on StackOverflow`_ for
 instructions.
 
-Installing the Puli Components
-------------------------------
+Next Steps
+----------
 
-The installation of each Puli component is described in dedicated chapters:
-
-* :doc:`../repository/introduction`
-* :doc:`../url-generator/introduction`
-* :doc:`../discovery/introduction`
+Read :doc:`../repository/introduction` to learn how to register your resources
+with Puli.
 
 .. _latest release page on GitHub: https://github.com/puli/cli/releases
 .. _this answer on StackOverflow: http://stackoverflow.com/questions/11456403/stop-shell-wildcard-character-expansion/22945024#22945024
