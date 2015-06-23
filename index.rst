@@ -117,11 +117,11 @@ package. Puli's Command Line Interface (CLI) is used to modify that metadata.
 
         $ php puli.phar map /batman/blog res
 
-.. topic:: Resource Overriding
+.. topic:: Overriding Packages
 
-    Puli packages may override resources from other packages. For example, your
-    application or a specialized theme package may replace the ``style.css``
-    file provided by a generic package "batman/blog" by a custom version:
+    Puli packages may override other packages. For example, your application or
+    a specialized theme package may replace the ``style.css`` file provided by a
+    generic package "batman/blog" by a custom version:
 
     .. code-block:: text
 
