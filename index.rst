@@ -191,6 +191,8 @@ package. Puli's Command Line Interface (CLI) is used to modify that metadata.
 
         <img src="/blog/logo.png" />
 
+.. topic:: Resource Installation
+
     If you want, you can Puli also to install your public resources on the
     server:
 
@@ -198,6 +200,9 @@ package. Puli's Command Line Interface (CLI) is used to modify that metadata.
 
         $ php puli.phar publish --install
         Installing /batman/blog/public into public_html/blog via symlink...
+
+    For the final release of Puli, this functionality will be moved to plugins
+    for Gulp, Brunch or similar asset management tools.
 
 Getting Started
 ---------------
