@@ -117,16 +117,6 @@ package. Puli's Command Line Interface (CLI) is used to modify that metadata.
 
         $ php puli.phar map /batman/blog res
 
-.. topic:: Overriding Packages
-
-    Puli packages may override other packages. For example, your application or
-    a specialized theme package may replace the ``style.css`` file provided by a
-    generic package "batman/blog" by a custom version:
-
-    .. code-block:: text
-
-        $ php puli.phar map /batman/blog/css/style.css res/css/blog/style.css
-
 .. topic:: Resource Discovery
 
     Puli packages may act as *resource consumers* and as *resource
@@ -159,7 +149,17 @@ package. Puli's Command Line Interface (CLI) is used to modify that metadata.
     The translator then loads all bound translation files from the discovery
     without any further configuration.
 
-.. topic:: Resource Publishing
+.. topic:: Package Overrides
+
+    Puli packages may override other packages. For example, your application or
+    a specialized theme package may replace the ``style.css`` file provided by a
+    generic package "batman/blog" by a custom version:
+
+    .. code-block:: text
+
+        $ php puli.phar map /batman/blog/css/style.css res/css/blog/style.css
+
+.. topic:: Resource URLs
 
     Puli publishes CSS files, JavaScript files and images bundled in your
     packages and generates their public URLs for you. You can pass Puli paths
@@ -194,7 +194,8 @@ package. Puli's Command Line Interface (CLI) is used to modify that metadata.
 .. topic:: Resource Installation
 
     If you want, you can Puli also to install your public resources on the
-    server:
+    server. If the server is your localhost, Puli creates simple symbolic links
+    or file copies in your document root:
 
     .. code-block:: text
 
