@@ -10,8 +10,8 @@
 
     </div>
 
-Puli: Intelligent Packages for PHP
-==================================
+Puli: Universal Packages for PHP
+================================
 
 .. toctree::
    :hidden:
@@ -41,7 +41,7 @@ Puli: Intelligent Packages for PHP
 
 .. toctree::
    :hidden:
-   :caption: Resource Discovery
+   :caption: Discovery
 
    Introduction <discovery/introduction>
    Getting Started <discovery/getting-started>
@@ -56,10 +56,9 @@ Puli: Intelligent Packages for PHP
    Symfony Bundle <extensions/symfony-bundle>
    Twig Extension <extensions/twig>
 
-Puli_ (pronounced "poo-lee") is a PHP technology that makes Composer_ packages
-more intelligent. Puli aims to replace "bundles", "plugins", "modules" and
-similar specialized packages supported by different frameworks with one generic,
-framework independent solution.
+Puli_ (pronounced "poo-lee") is a universal package system for PHP. Puli aims to
+replace "bundles", "plugins", "modules" and similar specialized packages of
+different frameworks with one generic, framework independent solution.
 
 Composer Packages
 -----------------
@@ -89,19 +88,37 @@ important features when dealing with packages:
         // loaded by Composer's autoloader
         $post = new Batman\Blog\Post();
 
-Puli Packages
--------------
+The Puli Package
+----------------
 
-Puli adds several other features to Composer packages that are typically needed
-in a PHP application. Similar to Composer's ``composer.json`` file, Puli
-packages store a ``puli.json`` file that contains Puli's metadata about the
-package. Puli's Command Line Interface (CLI) is used to modify that metadata.
+A Puli package is a directory that contains PHP code, non-PHP files and a
+``puli.json`` file. The ``puli.json`` file configures how your application and
+other Puli packages access and load the contents of your package.
 
-.. topic:: Resource Loading
+.. code-block:: text
 
-    Puli provides a naming convention (so called *Puli paths*) to load non-PHP
-    files, such as YAML, XML, CSS, HTML, images and more from your installed
-    packages:
+    my-package/
+        src/
+            ... PHP files ...
+        res/
+            ... non-PHP files ...
+        puli.json
+
+Puli packages are typically installed with Composer_. Add a ``composer.json`` to
+the package and distribute it on Packagist_. Then your package can be installed
+with the ``composer`` command line utility:
+
+.. code-block:: text
+
+    $ composer require vendor/my-package
+
+Features of Puli Packages
+-------------------------
+
+.. topic:: Resource Access
+
+    Puli provides a naming convention (so called *Puli paths*) to access non-PHP
+    files (YAML, XML, CSS, HTML, images and more) from a Puli package:
 
     .. code-block:: php
 
@@ -109,18 +126,18 @@ package. Puli's Command Line Interface (CLI) is used to modify that metadata.
         echo $twig->render('/batman/blog/views/index.html.twig');
 
     The path is resolved by reading *path mappings* from the ``puli.json`` files
-    of all installed Puli packages. Authors of these packages, such as the
+    of your installed Puli packages. Authors of these packages, such as the
     author of the "batman/blog" package, map prefixes to actual directories with
-    the Puli CLI:
+    the Puli Command Line Interface (CLI):
 
     .. code-block:: text
 
         $ php puli.phar map /batman/blog res
 
-.. topic:: Resource Discovery
+.. topic:: Discovery
 
-    Puli packages may act as *resource consumers* and as *resource
-    providers*. For example, a translator package (the consumer) may request
+    Puli packages may act as *consumers* and as *providers* of resources and PHP
+    classes. For example, a translator package (the consumer) may request
     translation files from other installed packages (the providers).
 
     .. raw:: html
@@ -135,12 +152,12 @@ package. Puli's Command Line Interface (CLI) is used to modify that metadata.
 
         </p>
 
-    Resource consumers, like our translator, give a name to the resources they
-    want to load, such as "thor/translations". This name is called a
-    *binding type*. Other packages (the *resource providers*) assign
-    their translation files to this type. This is called *binding*. In the end,
-    you as the user of both packages only need to pass Puli's
-    :class:`Puli\\Discovery\\Api\\ResourceDiscovery` to the ``Translator`` class:
+    Consumers, like our translator, give a name to the resources they want to
+    load, such as "thor/translations". This name is called a *binding type*.
+    Other packages (the *resource providers*) assign their translation files to
+    this type. This is called *binding*. In the end, you as the user of both
+    packages only need to pass Puli's :class:`Puli\\Discovery\\Api\\Discovery`
+    to the ``Translator`` class:
 
     .. code-block:: php
 
@@ -218,9 +235,9 @@ Puli's core packages maintain Puli's infrastructure for you.
 =================================== ==================================================== ================================================================================== ===================
 Package                             Source                                               Current Version                                                                    Next Stable Release
 =================================== ==================================================== ================================================================================== ===================
-The Puli Manager                    `GitHub <https://github.com/puli/manager>`__         `1.0.0-beta5 <https://github.com/puli/manager/releases/tag/1.0.0-beta5>`__         late 2015
-The Command Line Interface          `GitHub <https://github.com/puli/cli>`__             `1.0.0-beta5 <https://github.com/puli/cli/releases/tag/1.0.0-beta5>`__             late 2015
-The Composer Plugin                 `GitHub <https://github.com/puli/composer-plugin>`__ `1.0.0-beta5 <https://github.com/puli/composer-plugin/releases/tag/1.0.0-beta5>`__ late 2015
+The Puli Manager                    `GitHub <https://github.com/puli/manager>`__         `1.0.0-beta8 <https://github.com/puli/manager/releases/tag/1.0.0-beta8>`__         late 2015
+The Command Line Interface          `GitHub <https://github.com/puli/cli>`__             `1.0.0-beta8 <https://github.com/puli/cli/releases/tag/1.0.0-beta8>`__             late 2015
+The Composer Plugin                 `GitHub <https://github.com/puli/composer-plugin>`__ `1.0.0-beta8 <https://github.com/puli/composer-plugin/releases/tag/1.0.0-beta8>`__ late 2015
 =================================== ==================================================== ================================================================================== ===================
 
 Components
@@ -231,9 +248,9 @@ The Puli components provide the interface between your PHP code and Puli.
 =================================== ==================================================== ================================================================================== ===================
 Component                           Source                                               Current Version                                                                    Next Stable Release
 =================================== ==================================================== ================================================================================== ===================
-:doc:`repository/introduction`      `GitHub <https://github.com/puli/repository>`__      `1.0.0-beta5 <https://github.com/puli/repository/releases/tag/1.0.0-beta5>`__      late 2015
-:doc:`discovery/introduction`       `GitHub <https://github.com/puli/discovery>`__       `1.0.0-beta5 <https://github.com/puli/discovery/releases/tag/1.0.0-beta5>`__       late 2015
-:doc:`url-generator/introduction`   `GitHub <https://github.com/puli/url-generator>`__   `1.0.0-beta1 <https://github.com/puli/url-generator/releases/tag/1.0.0-beta1>`__   late 2015
+:doc:`repository/introduction`      `GitHub <https://github.com/puli/repository>`__      `1.0.0-beta8 <https://github.com/puli/repository/releases/tag/1.0.0-beta8>`__      late 2015
+:doc:`discovery/introduction`       `GitHub <https://github.com/puli/discovery>`__       `1.0.0-beta8 <https://github.com/puli/discovery/releases/tag/1.0.0-beta8>`__       late 2015
+:doc:`url-generator/introduction`   `GitHub <https://github.com/puli/url-generator>`__   `1.0.0-beta3 <https://github.com/puli/url-generator/releases/tag/1.0.0-beta3>`__   late 2015
 =================================== ==================================================== ================================================================================== ===================
 
 Extensions
@@ -244,9 +261,9 @@ Puli's extensions provide integration with different third-party tools.
 ======================================================= =================================================== ================================================================================= ===================
 Extension                                               Source                                              Current Version                                                                   Next Stable Release
 ======================================================= =================================================== ================================================================================= ===================
-:doc:`The Symfony Bridge <extensions/symfony-bridge>`   `GitHub <https://github.com/puli/symfony-bridge>`__ `1.0.0-beta2 <https://github.com/puli/symfony-bridge/releases/tag/1.0.0-beta2>`__ late 2015
-:doc:`The Symfony Bundle <extensions/symfony-bundle>`   `GitHub <https://github.com/puli/symfony-bundle>`__ `1.0.0-beta6 <https://github.com/puli/symfony-bundle/releases/tag/1.0.0-beta6>`__ late 2015
-:doc:`The Twig Extension <extensions/twig>`             `GitHub <https://github.com/puli/twig-extension>`__ `1.0.0-beta4 <https://github.com/puli/twig-extension/releases/tag/1.0.0-veta4>`__ late 2015
+:doc:`The Symfony Bridge <extensions/symfony-bridge>`   `GitHub <https://github.com/puli/symfony-bridge>`__ `1.0.0-beta3 <https://github.com/puli/symfony-bridge/releases/tag/1.0.0-beta3>`__ late 2015
+:doc:`The Symfony Bundle <extensions/symfony-bundle>`   `GitHub <https://github.com/puli/symfony-bundle>`__ `1.0.0-beta9 <https://github.com/puli/symfony-bundle/releases/tag/1.0.0-beta9>`__ late 2015
+:doc:`The Twig Extension <extensions/twig>`             `GitHub <https://github.com/puli/twig-extension>`__ `1.0.0-beta7 <https://github.com/puli/twig-extension/releases/tag/1.0.0-beta7>`__ late 2015
 ======================================================= =================================================== ================================================================================= ===================
 
 Authors
@@ -282,6 +299,7 @@ license`_.
 
 .. _Puli: https://github.com/puli/puli
 .. _Composer: https://getcomposer.org
+.. _Packagist: https://packagist.org
 .. _issue tracker: https://github.com/puli/puli/issues
 .. _docs issue tracker: https://github.com/puli/docs/issues
 .. _Git organization: https://github.com/puli
