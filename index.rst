@@ -60,34 +60,6 @@ Puli_ (pronounced "poo-lee") is a universal package system for PHP. Puli aims to
 replace "bundles", "plugins", "modules" and similar specialized packages of
 different frameworks with one generic, framework independent solution.
 
-Composer Packages
------------------
-
-From the perspective of an application developer, Composer provides two
-important features when dealing with packages:
-
-.. topic:: Installation and Dependency Resolution
-
-    Composer installs packages in different versions together with all their
-    dependencies by calling a simple console command:
-
-    .. code-block:: text
-
-        $ composer require batman/blog
-
-.. topic:: Class Autoloading
-
-    Composer generates a PSR-4 autoloader that is able to load the PHP classes
-    of all installed packages. Once the autoloader is included in your code, any
-    PHP class is loaded automatically when it is used for the first time:
-
-    .. code-block:: php
-
-        require_once __DIR__.'/vendor/autoload.php';
-
-        // loaded by Composer's autoloader
-        $post = new Batman\Blog\Post();
-
 The Puli Package
 ----------------
 
