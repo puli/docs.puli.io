@@ -269,6 +269,11 @@ License
 Puli, its extensions and this documentation are licensed under the `MIT
 license`_.
 
+Logo
+----
+
+The Puli logo was kindly sponsored by `Resonanz Online Marketing`_.
+
 .. _Puli: https://github.com/puli/puli
 .. _Composer: https://getcomposer.org
 .. _Packagist: https://packagist.org
@@ -281,3 +286,4 @@ license`_.
 .. _MIT license: LICENSE
 .. _Bernhard Schussek: http://webmozarts.com
 .. _The Community Contributors: https://github.com/puli/docs/graphs/contributors
+.. _Resonanz Online Marketing: http://www.resonanz-marketing.com/de/index.htm
