@@ -64,6 +64,17 @@ and enter the following command in a terminal:
 
     $ composer require --dev puli/cli:^1.0
 
+OSX Only: Using Homebrew
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you are on OSX, you can also install Puli through Homebrew_:
+
+.. code-block:: text
+
+    $ brew install puli
+
+Note: This command requires `Homebrew PHP to be installed`_.
+
 Unix Only: Disable Glob Expansion
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -109,4 +120,6 @@ with Puli.
 .. _CLI: https://github.com/puli/cli
 .. _Composer: https://getcomposer.org
 .. _Install Composer: https://getcomposer.org/doc/00-intro.md
+.. _Homebrew: http://brew.sh
+.. _Homebrew PHP to be installed: https://github.com/Homebrew/homebrew-php#installation
 
