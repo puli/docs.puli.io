@@ -42,6 +42,10 @@ The Phar can be updated with the ``self-update`` command:
 
     $ php puli.phar self-update
 
+.. note::
+
+    For this command to work you need PHP 5.6 or higher.
+
 As a Global Composer Dependency
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
