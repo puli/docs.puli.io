@@ -18,6 +18,21 @@ Contributions to the documentation are always welcome!
 * Report any bugs or issues you find on the [issue tracker].
 * You can grab the source code at Puli’s [Git repository].
 
+Compile the documentation
+-------------------------
+
+To compile the documentation and see your changes, you need the `sphinx-php` python package.  Install it via pip:
+
+```
+$ pip install "git+https://github.com/fabpot/sphinx-php.git#egg=sphinx-php"
+```
+
+Then compile it to HTML:
+
+```
+$ make html
+```
+
 Support
 -------
 
