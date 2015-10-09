@@ -182,7 +182,7 @@ Features of Puli Packages
 
 .. topic:: Resource Installation
 
-    If you want, you can Puli also to install your public resources on the
+    If you want, you can use Puli also to install your public resources on the
     server. If the server is your localhost, Puli creates simple symbolic links
     or file copies in your document root:
 
