@@ -21,13 +21,13 @@ Contributions to the documentation are always welcome!
 Compile the documentation
 -------------------------
 
-To compile the documentation and see your changes you need the `sphinx-php` python package.  Install it via pip:
+To compile the documentation and see your changes, you need the `sphinx-php` python package.  Install it via pip:
 
 ```
 $ pip install "git+https://github.com/fabpot/sphinx-php.git#egg=sphinx-php"
 ```
 
-Then compile it to html:
+Then compile it to HTML:
 
 ```
 $ make html
