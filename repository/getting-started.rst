@@ -70,7 +70,7 @@ file:
 .. code-block:: text
 
     $ mkdir app/Resources/views
-    $ echo "Success!" > app/Resources/views/index.html.twig
+    $ echo "Success" > app/Resources/views/index.html.twig
 
 Puli's :class:`Puli\\Repository\\Api\\ResourceRepository` can be used to access
 all files found through these |path mappings|. Let's print the contents of the
@@ -128,7 +128,7 @@ path prefix ``/app``. As example, we will add an ``index.html.twig`` file:
 .. code-block:: text
 
     $ mkdir res/views
-    $ echo "Success!" > res/views/index.html.twig
+    $ echo "Success" > res/views/index.html.twig
 
 Puli's :class:`Puli\\Repository\\Api\\ResourceRepository` can be used to access
 all files found through these |path mappings|. Use the Puli factory to create
@@ -194,7 +194,7 @@ file:
 .. code-block:: text
 
     $ mkdir res/views
-    $ echo "Success!" > res/views/index.html.twig
+    $ echo "Success" > res/views/index.html.twig
 
 Puli's :class:`Puli\\Repository\\Api\\ResourceRepository` can be used to access
 all files found through these |path mappings|. Let's print the contents of the
