@@ -68,10 +68,10 @@ and enter the following command in a terminal:
 
     $ composer require --dev puli/cli:^1.0
 
-OSX Only: Using Homebrew
-~~~~~~~~~~~~~~~~~~~~~~~~
+OS X Only: Using Homebrew
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you are on OSX, you can also install Puli through Homebrew_:
+If you are on OS X, you can also install Puli through Homebrew_:
 
 .. code-block:: text
 
