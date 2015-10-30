@@ -215,7 +215,7 @@ all files found through these |path mappings|. Let's print the contents of the
 
         public function printResources()
         {
-            echo $this->repo->get('/app/views/index.html.twig')->getBody();
+            echo $this->repo->get('/batman/blog/views/index.html.twig')->getBody();
         }
     }
 
