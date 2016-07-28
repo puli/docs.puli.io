@@ -54,7 +54,9 @@ tweaks to properly support Puli in Twig:
 
     use Puli\TwigExtension\PuliExtension;
 
-    $twig->addExtension(new PuliExtension($repo));
+    // The $urlGenerator is only needed if you use the resource_url() function
+    $twig->addExtension(new PuliExtension($repo, $urlGenerator));
+
 
 Usage in Twig
 -------------
