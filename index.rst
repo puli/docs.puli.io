@@ -204,13 +204,13 @@ Infrastructure
 
 Puli's core packages maintain Puli's infrastructure for you.
 
-=================================== ==================================================== ================================================================================== ===================
-Package                             Source                                               Current Version                                                                    Next Stable Release
-=================================== ==================================================== ================================================================================== ===================
-The Puli Manager                    `GitHub <https://github.com/puli/manager>`__         `1.0.0-beta8 <https://github.com/puli/manager/releases/tag/1.0.0-beta8>`__         late 2015
-The Command Line Interface          `GitHub <https://github.com/puli/cli>`__             `1.0.0-beta8 <https://github.com/puli/cli/releases/tag/1.0.0-beta8>`__             late 2015
-The Composer Plugin                 `GitHub <https://github.com/puli/composer-plugin>`__ `1.0.0-beta8 <https://github.com/puli/composer-plugin/releases/tag/1.0.0-beta8>`__ late 2015
-=================================== ==================================================== ================================================================================== ===================
+=================================== ==================================================== ==================================================================================== ===================
+Package                             Source                                               Current Version                                                                      Next Stable Release
+=================================== ==================================================== ==================================================================================== ===================
+The Puli Manager                    `GitHub <https://github.com/puli/manager>`__         `1.0.0-beta10 <https://github.com/puli/manager/releases/tag/1.0.0-beta10>`__         late 2016
+The Command Line Interface          `GitHub <https://github.com/puli/cli>`__             `1.0.0-beta10 <https://github.com/puli/cli/releases/tag/1.0.0-beta10>`__             late 2016
+The Composer Plugin                 `GitHub <https://github.com/puli/composer-plugin>`__ `1.0.0-beta10 <https://github.com/puli/composer-plugin/releases/tag/1.0.0-beta10>`__ late 2016
+=================================== ==================================================== ==================================================================================== ===================
 
 Components
 ----------
@@ -220,9 +220,9 @@ The Puli components provide the interface between your PHP code and Puli.
 =================================== ==================================================== ================================================================================== ===================
 Component                           Source                                               Current Version                                                                    Next Stable Release
 =================================== ==================================================== ================================================================================== ===================
-:doc:`repository/introduction`      `GitHub <https://github.com/puli/repository>`__      `1.0.0-beta8 <https://github.com/puli/repository/releases/tag/1.0.0-beta8>`__      late 2015
-:doc:`discovery/introduction`       `GitHub <https://github.com/puli/discovery>`__       `1.0.0-beta8 <https://github.com/puli/discovery/releases/tag/1.0.0-beta8>`__       late 2015
-:doc:`url-generator/introduction`   `GitHub <https://github.com/puli/url-generator>`__   `1.0.0-beta3 <https://github.com/puli/url-generator/releases/tag/1.0.0-beta3>`__   late 2015
+:doc:`repository/introduction`      `GitHub <https://github.com/puli/repository>`__      `1.0.0-beta10 <https://github.com/puli/repository/releases/tag/1.0.0-beta10>`__    late 2016
+:doc:`discovery/introduction`       `GitHub <https://github.com/puli/discovery>`__       `1.0.0-beta9 <https://github.com/puli/discovery/releases/tag/1.0.0-beta9>`__       late 2016
+:doc:`url-generator/introduction`   `GitHub <https://github.com/puli/url-generator>`__   `1.0.0-beta4 <https://github.com/puli/url-generator/releases/tag/1.0.0-beta4>`__   late 2016
 =================================== ==================================================== ================================================================================== ===================
 
 Extensions
@@ -230,13 +230,13 @@ Extensions
 
 Puli's extensions provide integration with different third-party tools.
 
-======================================================= =================================================== ================================================================================= ===================
-Extension                                               Source                                              Current Version                                                                   Next Stable Release
-======================================================= =================================================== ================================================================================= ===================
-:doc:`The Symfony Bridge <extensions/symfony-bridge>`   `GitHub <https://github.com/puli/symfony-bridge>`__ `1.0.0-beta3 <https://github.com/puli/symfony-bridge/releases/tag/1.0.0-beta3>`__ late 2015
-:doc:`The Symfony Bundle <extensions/symfony-bundle>`   `GitHub <https://github.com/puli/symfony-bundle>`__ `1.0.0-beta9 <https://github.com/puli/symfony-bundle/releases/tag/1.0.0-beta9>`__ late 2015
-:doc:`The Twig Extension <extensions/twig>`             `GitHub <https://github.com/puli/twig-extension>`__ `1.0.0-beta7 <https://github.com/puli/twig-extension/releases/tag/1.0.0-beta7>`__ late 2015
-======================================================= =================================================== ================================================================================= ===================
+======================================================= =================================================== =================================================================================== ===================
+Extension                                               Source                                              Current Version                                                                     Next Stable Release
+======================================================= =================================================== =================================================================================== ===================
+:doc:`The Symfony Bridge <extensions/symfony-bridge>`   `GitHub <https://github.com/puli/symfony-bridge>`__ `1.0.0-beta4 <https://github.com/puli/symfony-bridge/releases/tag/1.0.0-beta4>`__   late 2016
+:doc:`The Symfony Bundle <extensions/symfony-bundle>`   `GitHub <https://github.com/puli/symfony-bundle>`__ `1.0.0-beta10 <https://github.com/puli/symfony-bundle/releases/tag/1.0.0-beta10>`__ late 2016
+:doc:`The Twig Extension <extensions/twig>`             `GitHub <https://github.com/puli/twig-extension>`__ `1.0.0-beta8 <https://github.com/puli/twig-extension/releases/tag/1.0.0-beta8>`__   late 2016
+======================================================= =================================================== =================================================================================== ===================
 
 Authors
 -------
