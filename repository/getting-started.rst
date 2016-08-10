@@ -21,14 +21,11 @@ In a Symfony Project
 
 In a Symfony application, the Repository Component is installed through
 `Puli's Symfony Bundle`_. Before you install the bundle, set "minimum-stability"
-to "beta" in ``composer.json``:
+to "beta" by entering the following command in a terminal:
 
-.. code-block:: json
+.. code-block:: text
 
-    {
-        "minimum-stability": "beta"
-    }
-
+    $ composer config minimum-stability beta
 
 The bundle can be installed with Composer_. `Install Composer`_ and enter the
 following command in a terminal:
@@ -97,15 +94,12 @@ In a PHP Application
     system.
 
 In a PHP application, the Repository Component is installed through
-`Puli's Composer Plugin`_. Before you install the plugin, set
-"minimum-stability" to "beta" in ``composer.json``:
+`Puli's Composer Plugin`_. Before you install the plugin, set "minimum-stability"
+to "beta" by entering the following command in a terminal:
 
-.. code-block:: json
+.. code-block:: text
 
-    {
-        "minimum-stability": "beta"
-    }
-
+    $ composer config minimum-stability beta
 
 The plugin can be installed with Composer_. `Install Composer`_ and enter the
 following command in a terminal:
@@ -158,14 +152,12 @@ In a Composer Package
     system.
 
 In a Composer_ package, the Repository Component is installed manually. Before
-you install the component, set "minimum-stability" to "beta" in
-``composer.json``:
+you install the component, set "minimum-stability"
+to "beta" by entering the following command in a terminal:
 
-.. code-block:: json
+.. code-block:: text
 
-    {
-        "minimum-stability": "beta"
-    }
+    $ composer config minimum-stability beta
 
 `Install Composer`_ and enter the following command in a terminal:
 
